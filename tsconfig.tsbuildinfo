@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/SiteChrome.tsx","./src/components/sections/Hero.tsx","./src/components/sections/Sections.tsx","./src/lib/utils.ts","./src/pages/About.tsx","./src/pages/Allfix.tsx","./src/pages/Contact.tsx","./src/pages/Home.tsx","./src/pages/ServicesPage.tsx"],"version":"6.0.3"}
