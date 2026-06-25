@@ -70,35 +70,67 @@ export function AboutPreview() {
 }
 
 function OrbitVisual() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const v1 = useRef<HTMLVideoElement>(null);
+  const v2 = useRef<HTMLVideoElement>(null);
+  const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    
-    // Start at 3.5 seconds
-    video.currentTime = 3.5;
+    if (v1.current) {
+      v1.current.currentTime = 3.7;
+      v1.current.play().catch(() => {});
+    }
+    if (v2.current) {
+      v2.current.currentTime = 3.7;
+    }
+  }, []);
 
-    // Manually loop back to 3.5 seconds
-    const handleEnded = () => {
-      video.currentTime = 3.5;
-      video.play().catch(() => {});
+  useEffect(() => {
+    const currentVid = activeVideo === 1 ? v1.current : v2.current;
+    const nextVid = activeVideo === 1 ? v2.current : v1.current;
+    
+    if (!currentVid || !nextVid) return;
+
+    let transitioned = false;
+
+    const handleTime = () => {
+      if (!currentVid.duration) return;
+      const timeLeft = currentVid.duration - currentVid.currentTime;
+      
+      // Crossfade 0.8 seconds before the video ends
+      if (timeLeft <= 0.8 && !transitioned) {
+        transitioned = true;
+        nextVid.currentTime = 3.7;
+        nextVid.play().catch(() => {});
+        setActiveVideo(activeVideo === 1 ? 2 : 1);
+      }
     };
 
-    video.addEventListener("ended", handleEnded);
-    return () => video.removeEventListener("ended", handleEnded);
-  }, []);
+    currentVid.addEventListener("timeupdate", handleTime);
+    return () => currentVid.removeEventListener("timeupdate", handleTime);
+  }, [activeVideo]);
 
   return (
     <div className="relative w-full max-w-xl lg:max-w-2xl lg:scale-110 justify-self-center flex items-center justify-center">
       <video
-        ref={videoRef}
+        ref={v1}
         src="/Hero/herovideo.mp4"
-        autoPlay
         muted
         playsInline
         disablePictureInPicture
-        className="w-full h-auto"
+        className={`w-full h-auto absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 1 ? 'opacity-100' : 'opacity-0'}`}
+        style={{ 
+          mixBlendMode: "screen",
+          maskImage: "radial-gradient(circle, black 60%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(circle, black 60%, transparent 100%)"
+        }}
+      />
+      <video
+        ref={v2}
+        src="/Hero/herovideo.mp4"
+        muted
+        playsInline
+        disablePictureInPicture
+        className={`w-full h-auto relative transition-opacity duration-[800ms] ease-in-out ${activeVideo === 2 ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
           mixBlendMode: "screen",
           maskImage: "radial-gradient(circle, black 60%, transparent 100%)",

@@ -181,19 +181,7 @@ export function Hero() {
             ))}
           </motion.div>
 
-          {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-            <div className="flex flex-col items-center gap-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-              <span>Scroll</span>
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-                className="grid h-9 w-9 place-items-center rounded-full border border-border bg-black/30"
-              >
-                <ArrowDown className="h-4 w-4 text-neon" />
-              </motion.div>
-            </div>
-          </div>
+
         </motion.div>
       </div>
     </section>
@@ -202,12 +190,12 @@ export function Hero() {
 
 function RevealWords({ text, delay = 0, className = "" }: { text: string; delay?: number; className?: string }) {
   return (
-    <span className={`inline-block overflow-hidden align-bottom ${className}`}>
+    <span className="inline-block overflow-hidden align-bottom">
       <motion.span
         initial={{ y: "110%" }}
         animate={{ y: "0%" }}
         transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
-        className="inline-block"
+        className={`inline-block pb-1 ${className}`}
       >
         {text}
       </motion.span>
