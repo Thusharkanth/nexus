@@ -75,13 +75,34 @@ function OrbitVisual() {
   const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
 
   useEffect(() => {
+    const handleLoaded1 = () => {
+      if (v1.current) {
+        v1.current.currentTime = 3.7;
+        if (activeVideo === 1) v1.current.play().catch(() => {});
+      }
+    };
+    const handleLoaded2 = () => {
+      if (v2.current) {
+        v2.current.currentTime = 3.7;
+        if (activeVideo === 2) v2.current.play().catch(() => {});
+      }
+    };
+
     if (v1.current) {
-      v1.current.currentTime = 3.7;
-      v1.current.play().catch(() => {});
+      if (v1.current.readyState >= 1) handleLoaded1();
+      else v1.current.addEventListener("loadedmetadata", handleLoaded1);
+      v1.current.load();
     }
     if (v2.current) {
-      v2.current.currentTime = 3.7;
+      if (v2.current.readyState >= 1) handleLoaded2();
+      else v2.current.addEventListener("loadedmetadata", handleLoaded2);
+      v2.current.load();
     }
+
+    return () => {
+      if (v1.current) v1.current.removeEventListener("loadedmetadata", handleLoaded1);
+      if (v2.current) v2.current.removeEventListener("loadedmetadata", handleLoaded2);
+    };
   }, []);
 
   useEffect(() => {
@@ -110,14 +131,15 @@ function OrbitVisual() {
   }, [activeVideo]);
 
   return (
-    <div className="relative w-full max-w-xl lg:max-w-2xl lg:scale-110 justify-self-center flex items-center justify-center">
+    <div className="relative w-full aspect-video max-w-xl lg:max-w-2xl lg:scale-110 justify-self-center flex items-center justify-center overflow-hidden">
       <video
         ref={v1}
         src="/Hero/herovideo.mp4"
         muted
         playsInline
+        preload="auto"
         disablePictureInPicture
-        className={`w-full h-auto absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 1 ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 1 ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
           mixBlendMode: "screen",
           maskImage: "radial-gradient(circle, black 60%, transparent 100%)",
@@ -129,8 +151,9 @@ function OrbitVisual() {
         src="/Hero/herovideo.mp4"
         muted
         playsInline
+        preload="auto"
         disablePictureInPicture
-        className={`w-full h-auto relative transition-opacity duration-[800ms] ease-in-out ${activeVideo === 2 ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 2 ? 'opacity-100' : 'opacity-0'}`}
         style={{ 
           mixBlendMode: "screen",
           maskImage: "radial-gradient(circle, black 60%, transparent 100%)",
@@ -490,27 +513,7 @@ export function Process() {
 }
 
 /* ----------------- Team ----------------- */
-const TEAM = ["Lathurshan", "Hindujaan", "Shukri Ahmed", "Thusharkanth", "Kaveen", "Kavisheak", "Suhab"];
-const ROLES = ["Mobile Engineer", "AI & Automation", "Full-Stack Engineer", "Founder & Tech Lead", "Backend Engineer", "Product Designer", "Data & Analytics"];
-
 export function Team() {
-  const renderCard = (name: string, i: number) => (
-    <motion.div
-      key={name}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: i * 0.05 }}
-      className="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 p-6 transition-all hover:border-neon/40 hover:bg-surface w-full max-w-[280px] sm:w-[280px]"
-    >
-      <div className="mb-5 grid aspect-square w-full place-items-center rounded-xl bg-gradient-to-br from-neon/20 to-transparent">
-        <span className="font-display text-5xl font-bold text-foreground/30 transition-transform duration-500 group-hover:scale-110">{name[0]}</span>
-      </div>
-      <div className="font-display text-base font-semibold">{name}</div>
-      <div className="text-xs text-muted-foreground">{ROLES[i]}</div>
-    </motion.div>
-  );
-
   return (
     <section id="team" className="relative px-6 py-32 sm:py-40">
       <div className="mx-auto max-w-7xl">
@@ -521,47 +524,26 @@ export function Team() {
           align="center"
         />
         
-        <div className="mt-16 flex flex-col items-center">
-          {/* Tree Top Node (N Icon) */}
+        <div className="mt-16 flex justify-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="flex flex-col items-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+            className="group relative overflow-hidden rounded-[2rem] border border-border bg-surface/50 p-4 sm:p-8 transition-all hover:border-neon/40 hover:bg-surface w-full max-w-5xl"
           >
-            <div className="grid h-16 w-16 place-items-center rounded-2xl border border-neon/30 bg-neon/10 glow-neon">
-              <svg viewBox="0 0 24 24" className="h-8 w-8 text-neon" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 20 L4 4 L20 20 L20 4" />
-              </svg>
-            </div>
-            <div className="h-10 w-px bg-gradient-to-b from-neon/50 to-border my-2" />
-          </motion.div>
-
-          {/* Row 1 (2 Items) */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 w-full">
-            {TEAM.slice(0, 2).map((name, i) => renderCard(name, i))}
-          </div>
-
-          {/* Connector */}
-          <div className="h-10 w-px bg-border my-2" />
-
-          {/* Row 2 (5 Items + Join Us) */}
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 w-full">
-            {TEAM.slice(2, 7).map((name, i) => renderCard(name, i + 2))}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: TEAM.length * 0.05 }}
-              className="relative overflow-hidden rounded-2xl border border-dashed border-neon/40 bg-neon/5 p-6 w-full max-w-[280px] sm:w-[280px]"
-            >
-              <div className="mb-5 grid aspect-square w-full place-items-center rounded-xl">
-                <Users className="h-12 w-12 text-neon" />
+            <div className="mb-6 flex aspect-[2/1] sm:aspect-[21/9] w-full items-center justify-center rounded-xl bg-gradient-to-br from-neon/10 to-transparent overflow-hidden relative">
+              <div className="absolute inset-0 grid-bg opacity-30" />
+              <div className="relative flex flex-col items-center gap-4 text-center z-10 p-6">
+                <Users className="h-12 w-12 sm:h-16 sm:w-16 text-foreground/30 transition-transform duration-500 group-hover:scale-110 group-hover:text-neon/70" />
+                <span className="font-display text-lg sm:text-xl font-bold text-foreground/40">Team Photo Coming Soon</span>
               </div>
-              <div className="font-display text-base font-semibold">Join us</div>
-              <div className="text-xs text-muted-foreground">We're growing the team.</div>
-            </motion.div>
-          </div>
+            </div>
+            <div className="text-center px-4">
+              <div className="font-display text-xl sm:text-2xl font-semibold">The Nexus Team</div>
+              <div className="mt-2 text-sm sm:text-base text-muted-foreground">Mobile Engineers, AI Specialists, Full-Stack Developers, Product Designers & Data Analysts.</div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
