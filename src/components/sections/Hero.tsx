@@ -10,15 +10,36 @@ export function Hero() {
   const v2 = useRef<HTMLVideoElement>(null);
   const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
   const [showParticles, setShowParticles] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(
+    typeof window !== "undefined" && window.innerWidth < 768
+      ? "/Hero/Diamond_rotatingmobile.mp4"
+      : "/Hero/Diamond_rotating.mp4"
+  );
 
   useEffect(() => {
-    if (v1.current) v1.current.playbackRate = 0.8;
-    if (v2.current) v2.current.playbackRate = 0.8;
-    // Initial play for v1
-    if (v1.current) {
-      v1.current.play().catch(() => {});
-    }
+    const handleResize = () => {
+      setVideoSrc(
+        window.innerWidth < 768
+          ? "/Hero/Diamond_rotatingmobile.mp4"
+          : "/Hero/Diamond_rotating.mp4"
+      );
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    if (v1.current) {
+      v1.current.load();
+      v1.current.playbackRate = 0.8;
+      if (activeVideo === 1) v1.current.play().catch(() => {});
+    }
+    if (v2.current) {
+      v2.current.load();
+      v2.current.playbackRate = 0.8;
+      if (activeVideo === 2) v2.current.play().catch(() => {});
+    }
+  }, [videoSrc]);
 
   useEffect(() => {
     const currentVid = activeVideo === 1 ? v1.current : v2.current;
@@ -59,21 +80,21 @@ export function Hero() {
         {/* Two videos for true crossfading */}
         <video
           ref={v1}
-          src="/Hero/Diamond_rotating.mp4"
+          src={videoSrc}
           muted
           playsInline
           preload="auto"
           disablePictureInPicture
-          className={`absolute inset-0 h-full w-full object-cover z-10 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 1 ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 h-full w-full object-cover object-[center_70%] md:object-center z-10 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 1 ? 'opacity-100' : 'opacity-0'}`}
         />
         <video
           ref={v2}
-          src="/Hero/Diamond_rotating.mp4"
+          src={videoSrc}
           muted
           playsInline
           preload="auto"
           disablePictureInPicture
-          className={`absolute inset-0 h-full w-full object-cover z-10 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 2 ? 'opacity-100' : 'opacity-0'}`}
+          className={`absolute inset-0 h-full w-full object-cover object-[center_70%] md:object-center z-10 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 2 ? 'opacity-100' : 'opacity-0'}`}
         />
 
         {/* Gradient overlay */}
@@ -107,60 +128,62 @@ export function Hero() {
           animate={{ opacity: 1, transition: { duration: 0.6 } }}
           className="absolute inset-0 z-30 mx-auto flex h-full max-w-7xl flex-col justify-center px-6 pt-32 pb-8"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mb-4 sm:mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 text-xs font-medium tracking-wide backdrop-blur-[4px]"
-          >
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-neon" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-neon" />
-            </span>
-            <span className="text-muted-foreground">A division of</span>
-            <span className="font-semibold text-foreground">The Matrices Pvt Ltd</span>
-          </motion.div>
-
-          <h1 className="font-display text-[clamp(2.2rem,7vw,5.5rem)] font-bold leading-[0.95] tracking-tight text-balance">
-            <RevealWords text="Engineering the" delay={0.3} />
-            <br />
-            <RevealWords text="future of" delay={0.5} className="text-muted-foreground/80" />
-            <span className="ml-2 sm:ml-3 inline-block">
-              <RevealWords text="business." delay={0.7} className="text-gradient" />
-            </span>
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1 }}
-            className="mt-5 sm:mt-6 max-w-xl text-sm text-muted-foreground sm:text-base text-balance"
-          >
-            Nexus Solutions delivers AI-powered software, SaaS products, and digital transformation services
-            built to help modern teams automate, scale, and lead.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.1 }}
-            className="mt-6 sm:mt-8 flex flex-wrap items-center gap-4"
-          >
-            <Link to="/contact">
-              <MagneticButton className="!px-5 !py-3 sm:!px-6 sm:!py-3.5 !text-sm sm:!text-base">
-                Start a project <ArrowUpRight className="h-4 w-4" />
-              </MagneticButton>
-            </Link>
-            <Link
-              to="/allfix"
-              className="group inline-flex items-center gap-3 rounded-full border border-border bg-surface/50 px-4 py-2.5 sm:px-5 sm:py-3 text-sm font-medium transition-colors hover:bg-surface"
+          <div className="flex flex-col -mt-20 md:mt-0">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="mb-4 sm:mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 text-xs font-medium tracking-wide backdrop-blur-[4px]"
             >
-              <span className="grid h-6 w-6 sm:h-7 sm:w-7 place-items-center rounded-full bg-neon/15 text-neon transition-transform group-hover:scale-110">
-                <Play className="h-3 w-3 fill-current" />
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-neon" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-neon" />
               </span>
-              Explore ALLFIX SaaS
-            </Link>
-          </motion.div>
+              <span className="text-muted-foreground">A division of</span>
+              <span className="font-semibold text-foreground">The Matrices Pvt Ltd</span>
+            </motion.div>
+
+            <h1 className="font-display text-[clamp(2.2rem,7vw,5.5rem)] font-bold leading-[0.95] tracking-tight text-balance">
+              <RevealWords text="Engineering the" delay={0.3} />
+              <br />
+              <RevealWords text="future of" delay={0.5} className="text-muted-foreground/80" />
+              <span className="ml-2 sm:ml-3 inline-block">
+                <RevealWords text="business." delay={0.7} className="text-gradient" />
+              </span>
+            </h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1 }}
+              className="mt-5 sm:mt-6 max-w-xl text-sm text-muted-foreground sm:text-base text-balance"
+            >
+              Nexus Solutions delivers AI-powered software, SaaS products, and digital transformation services
+              built to help modern teams automate, scale, and lead.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 1.1 }}
+              className="mt-6 sm:mt-8 flex flex-wrap items-center gap-4"
+            >
+              <Link to="/contact">
+                <MagneticButton className="!px-5 !py-3 sm:!px-6 sm:!py-3.5 !text-sm sm:!text-base">
+                  Start a project <ArrowUpRight className="h-4 w-4" />
+                </MagneticButton>
+              </Link>
+              <Link
+                to="/allfix"
+                className="group inline-flex items-center gap-3 rounded-full border border-border bg-surface/50 px-4 py-2.5 sm:px-5 sm:py-3 text-sm font-medium transition-colors hover:bg-surface"
+              >
+                <span className="grid h-6 w-6 sm:h-7 sm:w-7 place-items-center rounded-full bg-neon/15 text-neon transition-transform group-hover:scale-110">
+                  <Play className="h-3 w-3 fill-current" />
+                </span>
+                Explore ALLFIX SaaS
+              </Link>
+            </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}

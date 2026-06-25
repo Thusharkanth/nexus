@@ -51,13 +51,13 @@ export function AboutPreview() {
     <section id="about" className="relative px-6 py-32 sm:py-40">
       <div className="mx-auto max-w-7xl">
         <div className="grid items-center gap-16 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
+          <div className="flex flex-col md:max-lg:items-center md:max-lg:text-center">
             <SectionHeader
               eyebrow="About Nexus"
               title={<>We turn complexity into <span className="text-gradient">competitive advantage.</span></>}
               sub="As the IT & Technology division of The Matrices Pvt Ltd, Nexus Solutions exists to make world-class engineering accessible — combining AI, software, and design into systems that compound over time."
             />
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="mt-10 flex flex-wrap items-center gap-4 md:max-lg:justify-center">
               <Link to="/about"><MagneticButton>Our story <ArrowUpRight className="h-4 w-4" /></MagneticButton></Link>
               <Link to="/services" className="text-sm font-medium text-muted-foreground hover:text-foreground">See how we work →</Link>
             </div>
