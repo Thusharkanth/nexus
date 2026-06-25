@@ -70,13 +70,32 @@ export function AboutPreview() {
 }
 
 function OrbitVisual() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    
+    // Start at 3.5 seconds
+    video.currentTime = 3.5;
+
+    // Manually loop back to 3.5 seconds
+    const handleEnded = () => {
+      video.currentTime = 3.5;
+      video.play().catch(() => {});
+    };
+
+    video.addEventListener("ended", handleEnded);
+    return () => video.removeEventListener("ended", handleEnded);
+  }, []);
+
   return (
-    <div className="relative w-full max-w-lg justify-self-center flex items-center justify-center">
+    <div className="relative w-full max-w-xl lg:max-w-2xl lg:scale-110 justify-self-center flex items-center justify-center">
       <video
+        ref={videoRef}
         src="/Hero/herovideo.mp4"
         autoPlay
         muted
-        loop
         playsInline
         disablePictureInPicture
         className="w-full h-auto"
@@ -143,7 +162,7 @@ function ServiceCard({ icon: Icon, title, desc, index }: { icon: React.ElementTy
         const r = e.currentTarget.getBoundingClientRect();
         setPos({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
       }}
-      className="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 p-7 transition-all duration-300 hover:border-neon/40 hover:bg-surface"
+      className="group relative overflow-hidden rounded-2xl border border-border bg-[#020503]/60 p-8 transition-all duration-300 hover:border-neon/40 hover:bg-[#050a06]"
       style={{ ["--mx" as string]: `${pos.x}%`, ["--my" as string]: `${pos.y}%` } as React.CSSProperties}
     >
       <div
@@ -151,14 +170,11 @@ function ServiceCard({ icon: Icon, title, desc, index }: { icon: React.ElementTy
         style={{ background: "radial-gradient(400px circle at var(--mx) var(--my), oklch(0.88 0.24 145 / 0.12), transparent 60%)" }}
       />
       <div className="relative">
-        <div className="mb-5 inline-grid h-11 w-11 place-items-center rounded-xl bg-neon/10 text-neon ring-1 ring-neon/20 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3">
+        <div className="mb-6 inline-grid h-12 w-12 place-items-center rounded-full bg-neon/10 text-neon transition-transform duration-300 group-hover:scale-110">
           <Icon className="h-5 w-5" />
         </div>
-        <h3 className="font-display text-lg font-semibold">{title}</h3>
-        <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
-        <div className="mt-6 flex items-center gap-1.5 text-xs font-medium text-neon opacity-0 transition-opacity group-hover:opacity-100">
-          Learn more <ArrowUpRight className="h-3.5 w-3.5" />
-        </div>
+        <h3 className="font-display text-[17px] font-semibold text-white tracking-wide">{title}</h3>
+        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground/90">{desc}</p>
       </div>
     </motion.div>
   );

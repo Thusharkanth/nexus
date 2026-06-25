@@ -1,90 +1,54 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import { useRef, useEffect, useState, useMemo } from "react";
 import { ArrowDown, ArrowUpRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { MagneticButton } from "@/components/SiteChrome";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const imageLayerRef = useRef<HTMLDivElement>(null);
-  const videoLayerRef = useRef<HTMLVideoElement>(null);
+  const v1 = useRef<HTMLVideoElement>(null);
+  const v2 = useRef<HTMLVideoElement>(null);
+  const [activeVideo, setActiveVideo] = useState<1 | 2>(1);
+  const [showParticles, setShowParticles] = useState(false);
 
-  // Use a ref to track scroll/play state — avoids triggering React re-renders on every scroll event
-  const isPlayingRef = useRef(false);
-  const rafRef = useRef<number | null>(null);
-
-  // Only a single boolean for React state — content overlay visibility
-  const [isScrolled, setIsScrolled] = useState(false);
-  const isScrolledRef = useRef(false);
-
-  const handleScroll = useCallback(() => {
-    const video = videoRef.current;
-    const imageLayer = imageLayerRef.current;
-    const videoLayer = videoLayerRef.current;
-    if (!video || !imageLayer || !videoLayer) return;
-
-    const scrollTop = window.scrollY;
-    const threshold = 10;
-    const outOfView = scrollTop > window.innerHeight * 1.5;
-
-    if (scrollTop > threshold && !outOfView) {
-      // Fade image out, video in — directly via style to avoid React render
-      imageLayer.style.opacity = "0";
-      videoLayer.style.opacity = "1";
-
-      if (!isPlayingRef.current) {
-        video.playbackRate = 2.0;
-        video.play().catch(() => {});
-        isPlayingRef.current = true;
-      }
-
-      if (!isScrolledRef.current) {
-        isScrolledRef.current = true;
-        setIsScrolled(true);
-      }
-    } else if (outOfView) {
-      // Past hero — pause to save resources
-      if (isPlayingRef.current) {
-        video.pause();
-        isPlayingRef.current = false;
-      }
-    } else {
-      // Back at the top
-      imageLayer.style.opacity = "1";
-      videoLayer.style.opacity = "0";
-
-      if (isPlayingRef.current) {
-        video.pause();
-        video.currentTime = 0;
-        isPlayingRef.current = false;
-      }
-
-      if (isScrolledRef.current) {
-        isScrolledRef.current = false;
-        setIsScrolled(false);
-      }
+  useEffect(() => {
+    if (v1.current) v1.current.playbackRate = 0.8;
+    if (v2.current) v2.current.playbackRate = 0.8;
+    // Initial play for v1
+    if (v1.current) {
+      v1.current.play().catch(() => {});
     }
   }, []);
 
   useEffect(() => {
-    // Throttle scroll handler via requestAnimationFrame so it never fires more than once per frame
-    const onScroll = () => {
-      if (rafRef.current !== null) return;
-      rafRef.current = requestAnimationFrame(() => {
-        handleScroll();
-        rafRef.current = null;
-      });
+    const currentVid = activeVideo === 1 ? v1.current : v2.current;
+    const nextVid = activeVideo === 1 ? v2.current : v1.current;
+    
+    if (!currentVid || !nextVid) return;
+
+    let transitioned = false;
+
+    const handleTime = () => {
+      if (!currentVid.duration) return;
+      const timeLeft = currentVid.duration - currentVid.currentTime;
+      
+      // Crossfade 0.8 seconds before the video ends
+      if (timeLeft <= 0.8 && !transitioned) {
+        transitioned = true;
+        nextVid.currentTime = 0;
+        nextVid.play().catch(() => {});
+        setActiveVideo(activeVideo === 1 ? 2 : 1);
+        
+        setShowParticles(true);
+        setTimeout(() => setShowParticles(false), 1500);
+      }
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    handleScroll(); // run once on mount
-
+    currentVid.addEventListener("timeupdate", handleTime);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      currentVid.removeEventListener("timeupdate", handleTime);
     };
-  }, [handleScroll]);
+  }, [activeVideo]);
 
   return (
     <section ref={ref} className="relative h-[150vh] w-full bg-background">
@@ -92,52 +56,27 @@ export function Hero() {
       {/* Sticky viewport-locked container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
 
-        {/* Static image — initial state. Controlled directly via ref (no re-render). */}
-        <div
-          ref={imageLayerRef}
-          className="absolute inset-0 h-full w-full z-10"
-          style={{
-            opacity: 1,
-            transition: "opacity 800ms ease-in-out",
-            // GPU compositing hint — keeps this layer on its own compositor thread
-            willChange: "opacity",
-          }}
-        >
-          <img
-            src="/Hero/NewDiamond.png"
-            alt="Nexus Solutions Hero"
-            fetchPriority="high"
-            decoding="async"
-            className="h-full w-full object-cover object-center"
-            style={{ transform: "scale(1.05)", transformOrigin: "center" }}
-          />
-        </div>
-
-        {/* Video — GPU-optimised: no overlapping blur/blend layers above it.
-            willChange + transform: translateZ(0) forces hardware acceleration. */}
+        {/* Two videos for true crossfading */}
         <video
-          ref={(el) => {
-            (videoRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
-            (videoLayerRef as React.MutableRefObject<HTMLVideoElement | null>).current = el;
-          }}
-          src="/Hero/herovideo.mp4"
-          playsInline
+          ref={v1}
+          src="/Hero/Diamond_rotating.mp4"
           muted
-          loop
+          playsInline
           preload="auto"
           disablePictureInPicture
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          style={{
-            opacity: 0,
-            transition: "opacity 800ms ease-in-out",
-            willChange: "opacity",
-            // Force the video onto its own compositor layer — critical for smooth decode
-            transform: "translateZ(0)",
-          }}
+          className={`absolute inset-0 h-full w-full object-cover z-10 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 1 ? 'opacity-100' : 'opacity-0'}`}
+        />
+        <video
+          ref={v2}
+          src="/Hero/Diamond_rotating.mp4"
+          muted
+          playsInline
+          preload="auto"
+          disablePictureInPicture
+          className={`absolute inset-0 h-full w-full object-cover z-10 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 2 ? 'opacity-100' : 'opacity-0'}`}
         />
 
-        {/* Single lightweight gradient overlay — NO mix-blend, NO backdrop-blur.
-            Pure GPU-friendly semi-transparent layer. */}
+        {/* Gradient overlay */}
         <div
           className="pointer-events-none absolute inset-0 z-20"
           style={{
@@ -155,10 +94,13 @@ export function Hero() {
           }}
         />
 
-        {/* Floating shapes — backdrop-blur removed to prevent extra composite layers over video */}
+        {/* Floating shapes */}
         <FloatingShapes />
+        
+        {/* Transition particles that appear when video fades */}
+        <TransitionParticles show={showParticles} />
 
-        {/* Hero content — stays visible on scroll over the video */}
+        {/* Hero content */}
         <motion.div
           key="hero-content"
           initial={{ opacity: 0 }}
@@ -273,7 +215,6 @@ function RevealWords({ text, delay = 0, className = "" }: { text: string; delay?
   );
 }
 
-// Floating shapes — backdrop-blur REMOVED to prevent GPU composite layers being created above video
 function FloatingShapes() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
@@ -284,3 +225,47 @@ function FloatingShapes() {
     </div>
   );
 }
+
+function TransitionParticles({ show }: { show: boolean }) {
+  const particles = useMemo(() => {
+    return Array.from({ length: 40 }).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1.5,
+      duration: Math.random() * 1.5 + 1,
+    }));
+  }, []);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: show ? 1 : 0 }}
+      transition={{ duration: 0.5 }}
+      className="pointer-events-none absolute inset-0 z-[15] overflow-hidden"
+    >
+      {particles.map((p, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-neon shadow-[0_0_8px_rgba(4,210,148,0.8)]"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+          }}
+          animate={show ? {
+            y: [0, -30, -60],
+            opacity: [0, 0.8, 0],
+            scale: [1, 1.5, 0.5],
+          } : {}}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      ))}
+    </motion.div>
+  );
+}
+
