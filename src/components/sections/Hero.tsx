@@ -229,7 +229,6 @@ function RevealWords({ text, delay = 0, className = "" }: { text: string; delay?
 function FloatingShapes() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 z-20 overflow-hidden">
-      <div className="animate-float absolute left-[8%] top-[22%] h-24 w-24 rounded-2xl border border-neon/25 bg-neon/5" style={{ animationDelay: "0s" }} />
       <div className="animate-float absolute right-[10%] top-[30%] h-16 w-16 rounded-full border border-white/15 bg-white/5" style={{ animationDelay: "1.5s" }} />
       <div className="animate-float absolute right-[18%] bottom-[20%] h-20 w-20 rotate-12 border border-neon/25" style={{ animationDelay: "3s" }} />
       <div className="animate-float absolute left-[14%] bottom-[18%] h-3 w-3 rounded-full bg-neon glow-neon" style={{ animationDelay: "2s" }} />

@@ -6,6 +6,8 @@ import About from "@/pages/About";
 import ServicesPage from "@/pages/ServicesPage";
 import Contact from "@/pages/Contact";
 import Allfix from "@/pages/Allfix";
+import Portfolio from "@/pages/Portfolio";
+import PortfolioCategory from "@/pages/PortfolioCategory";
 import { IntroVideo } from "@/components/IntroVideo";
 
 function AppRoutes({ introComplete }: { introComplete: boolean }) {
@@ -38,6 +40,8 @@ function AppRoutes({ introComplete }: { introComplete: boolean }) {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/portfolio/:category" element={<PortfolioCategory />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/allfix" element={<Allfix />} />
       </Routes>
