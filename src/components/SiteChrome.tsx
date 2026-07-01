@@ -173,8 +173,8 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2"><LogoMark /><span className="font-display text-lg font-semibold">Nexus<span className="text-neon">.</span></span></div>
-            <p className="mt-4 max-w-sm text-sm text-muted-foreground">The IT & Technology division of The Matrices Pvt Ltd. Building AI, SaaS, and digital transformation systems for ambitious teams.</p>
-            <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">Colombo · Badulla · Global</p>
+            <p className="mt-4 max-w-sm text-sm text-muted-foreground">Nexus Solutions is the technology division of The Matrices Pvt Ltd, delivering software engineering, AI solutions, automation systems, and digital transformation services for modern businesses.</p>
+            <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">Colombo · Badulla · Sri Lanka</p>
           </div>
           <FooterCol title="Company" links={[["About", "/about"], ["Services", "/services"], ["Careers", "/careers"], ["Contact", "/contact"]]} />
           <FooterCol title="Product" links={[["ALLFIX", "/allfix"], ["Case Studies", "/#case-studies"], ["Team", "/#team"]]} />

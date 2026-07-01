@@ -15,17 +15,17 @@ export default function Contact() {
         <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
             <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="font-display text-balance text-5xl font-semibold leading-[1.02] sm:text-6xl md:text-7xl">
-              Let's talk about <span className="text-gradient">what's next.</span>
+              Let's Build What's <span className="text-gradient">Next.</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }} className="mt-6 max-w-lg text-lg text-muted-foreground">
-              Tell us about your project. We'll come back within 24 hours with a clear next step — whether that's a demo, a discovery call, or a proposal.
+              Whether you're looking to modernize operations, develop custom software, explore AI solutions, or transform existing systems, our team is ready to help.
             </motion.p>
 
             <div className="mt-10 space-y-4">
               {[
-                { icon: Mail, label: "Email", value: "hello@nexus.lk" },
+                { icon: Mail, label: "Email", value: "01nexus.solutions@gmail.com" },
                 { icon: MessageCircle, label: "WhatsApp", value: "Priority channel · 24/7" },
-                { icon: Calendar, label: "Book a call", value: "30-minute consultation" },
+                { icon: Calendar, label: "Schedule Consultation", value: "30-minute consultation" },
                 { icon: MapPin, label: "Studios", value: "Colombo · Badulla, Sri Lanka" },
               ].map((c) => (
                 <div key={c.label} className="flex items-center gap-4 rounded-2xl border border-border bg-surface/50 p-4">

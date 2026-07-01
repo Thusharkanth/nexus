@@ -143,12 +143,12 @@ export function Hero() {
               <span className="font-semibold text-foreground">The Matrices Pvt Ltd</span>
             </motion.div>
 
-            <h1 className="font-display text-[clamp(2.2rem,7vw,5.5rem)] font-bold leading-[0.95] tracking-tight text-balance">
-              <RevealWords text="Engineering the" delay={0.3} />
+            <h1 className="font-display text-[clamp(1.8rem,5.8vw,4.6rem)] font-bold leading-[0.95] tracking-tight text-balance">
+              <RevealWords text="Technology That Helps" delay={0.3} />
               <br />
-              <RevealWords text="future of" delay={0.5} className="text-muted-foreground/80" />
-              <span className="ml-2 sm:ml-3 inline-block">
-                <RevealWords text="business." delay={0.7} className="text-gradient" />
+              <RevealWords text="Businesses Grow," delay={0.5} className="text-muted-foreground/80" />
+              <span className="inline-block">
+                <RevealWords text="Automate, and Scale" delay={0.7} className="text-gradient" />
               </span>
             </h1>
 
@@ -158,8 +158,8 @@ export function Hero() {
               transition={{ duration: 0.7, delay: 1 }}
               className="mt-5 sm:mt-6 max-w-xl text-sm text-muted-foreground sm:text-base text-balance"
             >
-              Nexus Solutions delivers AI-powered software, SaaS products, and digital transformation services
-              built to help modern teams automate, scale, and lead.
+              We help growing businesses transform operations through custom software, AI solutions,
+              automation, and digital innovation, delivering measurable results without enterprise-level complexity.
             </motion.p>
 
             <motion.div
@@ -170,7 +170,7 @@ export function Hero() {
             >
               <Link to="/contact">
                 <MagneticButton className="!px-5 !py-3 sm:!px-6 sm:!py-3.5 !text-sm sm:!text-base">
-                  Start a project <ArrowUpRight className="h-4 w-4" />
+                  Book a Consultation <ArrowUpRight className="h-4 w-4" />
                 </MagneticButton>
               </Link>
               <Link

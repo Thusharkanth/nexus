@@ -54,11 +54,11 @@ export function AboutPreview() {
           <div className="flex flex-col md:max-lg:items-center md:max-lg:text-center">
             <SectionHeader
               eyebrow="About Nexus"
-              title={<>We turn complexity into <span className="text-gradient">competitive advantage.</span></>}
-              sub="As the IT & Technology division of The Matrices Pvt Ltd, Nexus Solutions exists to make world-class engineering accessible — combining AI, software, and design into systems that compound over time."
+              title={<>Technology Partner for <span className="text-gradient">Modern Businesses.</span></>}
+              sub="Nexus Solutions is the technology division of The Matrices Pvt Ltd, focused on delivering innovative software, AI-powered systems, automation solutions, and digital transformation initiatives. Our approach combines technical excellence with practical business thinking, ensuring every solution creates measurable value while supporting long-term growth."
             />
             <div className="mt-10 flex flex-wrap items-center gap-4 md:max-lg:justify-center">
-              <Link to="/about"><MagneticButton>Our story <ArrowUpRight className="h-4 w-4" /></MagneticButton></Link>
+              <Link to="/about"><MagneticButton>Learn More About Nexus Solutions <ArrowUpRight className="h-4 w-4" /></MagneticButton></Link>
               <Link to="/services" className="text-sm font-medium text-muted-foreground hover:text-foreground">See how we work →</Link>
             </div>
           </div>
@@ -188,7 +188,8 @@ export function Services() {
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionHeader
             eyebrow="What we do"
-            title={<>A full-stack technology partner, <span className="text-gradient">all under one roof.</span></>}
+            title={<>Solutions Designed Around <span className="text-gradient">Business Outcomes.</span></>}
+            sub="Every organization faces unique operational challenges. Our services are designed to help businesses improve efficiency, increase visibility, automate repetitive processes, and create better customer experiences."
           />
           <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-neon">
             View all services <ArrowUpRight className="h-4 w-4" />
@@ -270,14 +271,14 @@ export function AllfixHighlight() {
                 <Wrench className="h-3.5 w-3.5" /> Product · SaaS
               </div>
               <h3 className="font-display text-balance text-4xl font-semibold leading-[1.05] sm:text-5xl md:text-6xl">
-                ALLFIX — repair management, <span className="text-gradient">reimagined.</span>
+                ALLFIX — Repair Management <span className="text-gradient">Made Simple.</span>
               </h3>
               <p className="mt-5 max-w-lg text-muted-foreground">
-                The complete service-repair management platform for modern repair businesses.
-                Track repairs, manage customers, automate workflows, and run your shop from one place.
+                ALLFIX is a modern service repair management platform built to help repair businesses streamline operations,
+                improve customer communication, and gain complete visibility across service workflows.
               </p>
               <ul className="mt-8 grid gap-3">
-                {["Repair tracking system", "Customer management", "Workflow automation", "Service shop management"].map((f) => (
+                {["Faster repair processing", "Improved customer experience", "Better operational visibility", "Reduced administrative workload", "Scalable business management"].map((f) => (
                   <li key={f} className="flex items-center gap-3 text-sm">
                     <span className="grid h-5 w-5 place-items-center rounded-full bg-neon/15 text-neon"><Check className="h-3 w-3" /></span>
                     {f}
@@ -286,7 +287,7 @@ export function AllfixHighlight() {
               </ul>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Link to="/allfix"><MagneticButton>Explore ALLFIX <ArrowUpRight className="h-4 w-4" /></MagneticButton></Link>
-                <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground">Book a demo →</Link>
+                <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground">Request a Demo →</Link>
               </div>
             </div>
             <motion.div style={{ y }} className="relative">
@@ -354,10 +355,10 @@ function AllfixMock() {
 
 /* ----------------- Why Choose Us ----------------- */
 const WHY = [
-  { icon: ShieldCheck, title: "Trust by design", text: "Long-term partnerships built on reliability and measurable outcomes — not contracts." },
-  { icon: Sparkles, title: "AI-first thinking", text: "We embed intelligence into every layer, from interface to infrastructure." },
-  { icon: Zap, title: "Ship velocity", text: "Modern stacks and disciplined process let us move from idea to production fast." },
-  { icon: Globe, title: "Global craft, local roots", text: "Two studios in Sri Lanka serving clients across the world, end-to-end." },
+  { icon: ShieldCheck, title: "Business-First Approach", text: "We focus on solving business challenges rather than simply delivering technology." },
+  { icon: Sparkles, title: "Modern Technology Expertise", text: "We leverage the latest software engineering, cloud technologies, AI systems, and automation frameworks." },
+  { icon: Zap, title: "Scalable Solutions", text: "Every solution is designed to support future growth and long-term sustainability." },
+  { icon: Globe, title: "Long-Term Partnerships", text: "We build lasting relationships that extend beyond project delivery." },
 ];
 
 export function WhyChoose() {
@@ -366,8 +367,8 @@ export function WhyChoose() {
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Why Nexus"
-          title={<>Premium engineering, <span className="text-gradient">without the premium overhead.</span></>}
-          sub="We compete on craft, speed, and partnership — built to feel like an in-house team that ships."
+          title={<>Why Businesses Choose <span className="text-gradient">Nexus Solutions.</span></>}
+          sub="We combine business understanding, modern technology, and practical execution to deliver solutions that solve real-world challenges."
           align="center"
         />
         <div className="mt-16 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
@@ -414,9 +415,9 @@ function Counter({ target, suffix, label }: { target: number; suffix: string; la
 
 /* ----------------- Case Studies ----------------- */
 const CASES = [
-  { tag: "SaaS · Repair", title: "ALLFIX", desc: "From shop floor to scalable SaaS — a full workflow OS for service businesses.", color: "from-neon/30 to-transparent" },
-  { tag: "AI · Automation", title: "Conversational Ops", desc: "Cut customer-support load by 60% with an AI agent trained on internal docs.", color: "from-emerald-400/20 to-transparent" },
-  { tag: "Digital Transformation", title: "Legacy → Cloud", desc: "Migrated a regional retailer to a modern cloud stack with zero downtime.", color: "from-teal-400/20 to-transparent" },
+  { tag: "Challenge", title: "Business Problem", desc: "Describe the operational bottleneck, inefficiency, or growth blocker affecting performance.", color: "from-neon/30 to-transparent" },
+  { tag: "Solution", title: "Technology Implementation", desc: "Show the custom software, automation, AI, or platform solution introduced to solve it.", color: "from-emerald-400/20 to-transparent" },
+  { tag: "Impact", title: "Measurable Results", desc: "Highlight outcomes such as faster processes, reduced manual workload, and improved customer engagement.", color: "from-teal-400/20 to-transparent" },
 ];
 
 export function CaseStudies() {
@@ -426,7 +427,7 @@ export function CaseStudies() {
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionHeader
             eyebrow="Proof of work"
-            title={<>Selected work that <span className="text-gradient">moved the numbers.</span></>}
+            title={<>Real Business Challenges. <span className="text-gradient">Practical Solutions.</span></>}
           />
           <Link to="/contact" className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-neon">
             Discuss your project <ArrowUpRight className="h-4 w-4" />
@@ -481,7 +482,7 @@ export function Process() {
       <div className="mx-auto max-w-5xl">
         <SectionHeader
           eyebrow="How we work"
-          title={<>A process built for <span className="text-gradient">momentum.</span></>}
+          title={<span className="lg:whitespace-nowrap">A process built for <span className="text-gradient">momentum.</span></span>}
           align="center"
         />
         <div ref={ref} className="relative mt-20 pl-12 sm:pl-20">
@@ -519,8 +520,8 @@ export function Team() {
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="The team"
-          title={<>Builders, designers & <span className="text-gradient">problem-solvers.</span></>}
-          sub="A tight group of senior engineers and creatives who care as much about your business as you do."
+          title={<>Leadership & Strategic <span className="text-gradient">Direction.</span></>}
+          sub="Nexus Solutions combines business leadership, technical expertise, and industry experience to help organizations navigate digital transformation with confidence."
           align="center"
         />
         
@@ -541,7 +542,7 @@ export function Team() {
             </div>
             <div className="text-center px-4">
               <div className="font-display text-xl sm:text-2xl font-semibold">The Nexus Team</div>
-              <div className="mt-2 text-sm sm:text-base text-muted-foreground">Mobile Engineers, AI Specialists, Full-Stack Developers, Product Designers & Data Analysts.</div>
+              <div className="mt-2 text-sm sm:text-base text-muted-foreground">Leadership: Hindujan, Thusharkanth, Suhaib. Technical Contributors: Shukri Ahmed, Lathurshan Muralitharan, Kaveen, Kavisheak.</div>
             </div>
           </motion.div>
         </div>
@@ -660,23 +661,23 @@ export function FinalCTA() {
               <Sparkles className="h-3.5 w-3.5" /> Ready when you are
             </div>
             <h2 className="font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
-              Let's build something <span className="text-gradient">worth scaling.</span>
+              Let's Build What's <span className="text-gradient">Next.</span>
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-muted-foreground">
-              Tell us about your project. We'll come back within 24 hours with a clear next step.
+              Whether you're looking to modernize operations, develop custom software, explore AI solutions, or transform existing systems, our team is ready to help.
             </p>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
               <Link to="/contact">
                 <MagneticButton className="!px-7 !py-4 !text-base">
-                  Start a project <ArrowUpRight className="h-4 w-4" />
+                  Schedule Consultation <ArrowUpRight className="h-4 w-4" />
                 </MagneticButton>
               </Link>
               <Link to="/contact" className="inline-flex items-center gap-3 rounded-full border border-border bg-surface/50 px-6 py-3.5 text-sm font-medium backdrop-blur transition-colors hover:bg-surface">
-                <MessageCircle className="h-4 w-4 text-neon" /> Chat on WhatsApp
+                <MessageCircle className="h-4 w-4 text-neon" /> WhatsApp Us
               </Link>
             </div>
             <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              <span className="inline-flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-neon" /> hello@nexus.lk</span>
+              <span className="inline-flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-neon" /> 01nexus.solutions@gmail.com</span>
               <span className="inline-flex items-center gap-2"><Calendar className="h-3.5 w-3.5 text-neon" /> Book a call</span>
               <span className="inline-flex items-center gap-2"><MessageCircle className="h-3.5 w-3.5 text-neon" /> WhatsApp priority</span>
             </div>

@@ -16,10 +16,10 @@ export default function Allfix() {
             <Wrench className="h-3.5 w-3.5" /> ALLFIX · SaaS
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="font-display text-balance text-5xl font-semibold leading-[1.02] sm:text-6xl md:text-7xl">
-            Run your repair shop <span className="text-gradient">from one screen.</span>
+            ALLFIX — Repair Management <span className="text-gradient">Made Simple.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
-            ALLFIX is the complete service-repair management system — built for modern repair businesses that want to move faster, retain customers, and grow.
+            ALLFIX is a modern service repair management platform built to help repair businesses streamline operations, improve customer communication, and gain complete visibility across service workflows.
           </motion.p>
         </div>
       </section>

@@ -11,6 +11,16 @@ import PortfolioCategory from "@/pages/PortfolioCategory";
 import Careers from "@/pages/Careers";
 import { IntroVideo } from "@/components/IntroVideo";
 
+function ScrollToTopOnRouteChange() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function AppRoutes({ introComplete }: { introComplete: boolean }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const hasAnimated = useRef(false);
@@ -65,6 +75,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTopOnRouteChange />
       {showIntro && (
         <IntroVideo onComplete={handleIntroComplete} />
       )}
