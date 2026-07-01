@@ -54,8 +54,8 @@ export function AboutPreview() {
           <div className="flex flex-col md:max-lg:items-center md:max-lg:text-center">
             <SectionHeader
               eyebrow="About Nexus"
-              title={<>Technology Partner for <span className="text-gradient">Modern Businesses.</span></>}
-              sub="Nexus Solutions is the technology division of The Matrices Pvt Ltd, focused on delivering innovative software, AI-powered systems, automation solutions, and digital transformation initiatives. Our approach combines technical excellence with practical business thinking, ensuring every solution creates measurable value while supporting long-term growth."
+              title={<>Building Technology That <span className="text-gradient">Drives Business.</span></>}
+              sub="Nexus Solutions is the Tech Division of The Matrices Pvt Ltd, building intelligent software, AI solutions, and digital products that help businesses innovate, scale, and stay ahead."
             />
             <div className="mt-10 flex flex-wrap items-center gap-4 md:max-lg:justify-center">
               <Link to="/about"><MagneticButton>Learn More About Nexus Solutions <ArrowUpRight className="h-4 w-4" /></MagneticButton></Link>
@@ -78,13 +78,13 @@ function OrbitVisual() {
     const handleLoaded1 = () => {
       if (v1.current) {
         v1.current.currentTime = 3.7;
-        if (activeVideo === 1) v1.current.play().catch(() => {});
+        if (activeVideo === 1) v1.current.play().catch(() => { });
       }
     };
     const handleLoaded2 = () => {
       if (v2.current) {
         v2.current.currentTime = 3.7;
-        if (activeVideo === 2) v2.current.play().catch(() => {});
+        if (activeVideo === 2) v2.current.play().catch(() => { });
       }
     };
 
@@ -108,7 +108,7 @@ function OrbitVisual() {
   useEffect(() => {
     const currentVid = activeVideo === 1 ? v1.current : v2.current;
     const nextVid = activeVideo === 1 ? v2.current : v1.current;
-    
+
     if (!currentVid || !nextVid) return;
 
     let transitioned = false;
@@ -116,12 +116,12 @@ function OrbitVisual() {
     const handleTime = () => {
       if (!currentVid.duration) return;
       const timeLeft = currentVid.duration - currentVid.currentTime;
-      
+
       // Crossfade 0.8 seconds before the video ends
       if (timeLeft <= 0.8 && !transitioned) {
         transitioned = true;
         nextVid.currentTime = 3.7;
-        nextVid.play().catch(() => {});
+        nextVid.play().catch(() => { });
         setActiveVideo(activeVideo === 1 ? 2 : 1);
       }
     };
@@ -140,7 +140,7 @@ function OrbitVisual() {
         preload="auto"
         disablePictureInPicture
         className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 1 ? 'opacity-100' : 'opacity-0'}`}
-        style={{ 
+        style={{
           mixBlendMode: "screen",
           maskImage: "radial-gradient(circle, black 60%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(circle, black 60%, transparent 100%)"
@@ -154,7 +154,7 @@ function OrbitVisual() {
         preload="auto"
         disablePictureInPicture
         className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-[800ms] ease-in-out ${activeVideo === 2 ? 'opacity-100' : 'opacity-0'}`}
-        style={{ 
+        style={{
           mixBlendMode: "screen",
           maskImage: "radial-gradient(circle, black 60%, transparent 100%)",
           WebkitMaskImage: "radial-gradient(circle, black 60%, transparent 100%)"
@@ -180,7 +180,7 @@ const SERVICES = [
   { icon: Globe, title: "Digital Transformation", desc: "Modernize legacy stacks without breaking flow." },
 ];
 
-export function Services() {
+export function Services({ showViewAll = true }: { showViewAll?: boolean }) {
   return (
     <section id="services" className="relative px-6 py-32 sm:py-40">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
@@ -188,12 +188,14 @@ export function Services() {
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionHeader
             eyebrow="What we do"
-            title={<>Solutions Designed Around <span className="text-gradient">Business Outcomes.</span></>}
-            sub="Every organization faces unique operational challenges. Our services are designed to help businesses improve efficiency, increase visibility, automate repetitive processes, and create better customer experiences."
+            title={<>Engineering Solutions That Create <span className="text-gradient">Business Value.</span></>}
+            sub="From intelligent software and AI-powered systems to digital products and automation, we build technology that helps businesses operate smarter, scale faster, and stay ahead."
           />
-          <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-neon">
-            View all services <ArrowUpRight className="h-4 w-4" />
-          </Link>
+          {showViewAll && (
+            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-neon">
+              View all services <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          )}
         </div>
 
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -287,7 +289,7 @@ export function AllfixHighlight() {
               </ul>
               <div className="mt-10 flex flex-wrap items-center gap-4">
                 <Link to="/allfix"><MagneticButton>Explore ALLFIX <ArrowUpRight className="h-4 w-4" /></MagneticButton></Link>
-                <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-foreground">Request a Demo →</Link>
+                <a href="https://www.allfix.space/" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-foreground">Request a Demo →</a>
               </div>
             </div>
             <motion.div style={{ y }} className="relative">
@@ -524,7 +526,7 @@ export function Team() {
           sub="Nexus Solutions combines business leadership, technical expertise, and industry experience to help organizations navigate digital transformation with confidence."
           align="center"
         />
-        
+
         <div className="mt-16 flex justify-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -672,14 +674,14 @@ export function FinalCTA() {
                   Schedule Consultation <ArrowUpRight className="h-4 w-4" />
                 </MagneticButton>
               </Link>
-              <Link to="/contact" className="inline-flex items-center gap-3 rounded-full border border-border bg-surface/50 px-6 py-3.5 text-sm font-medium backdrop-blur transition-colors hover:bg-surface">
+              <a href="https://wa.me/94769696083" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full border border-border bg-surface/50 px-6 py-3.5 text-sm font-medium backdrop-blur transition-colors hover:bg-surface">
                 <MessageCircle className="h-4 w-4 text-neon" /> WhatsApp Us
-              </Link>
+              </a>
             </div>
             <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              <span className="inline-flex items-center gap-2"><Mail className="h-3.5 w-3.5 text-neon" /> 01nexus.solutions@gmail.com</span>
-              <span className="inline-flex items-center gap-2"><Calendar className="h-3.5 w-3.5 text-neon" /> Book a call</span>
-              <span className="inline-flex items-center gap-2"><MessageCircle className="h-3.5 w-3.5 text-neon" /> WhatsApp priority</span>
+              <a href="mailto:hello@nexus.lk" className="inline-flex items-center gap-2 hover:text-neon transition-colors"><Mail className="h-3.5 w-3.5 text-neon" /> hello@nexus.lk</a>
+              <Link to="/contact" className="inline-flex items-center gap-2 hover:text-neon transition-colors"><Calendar className="h-3.5 w-3.5 text-neon" /> Book a call</Link>
+              <a href="https://wa.me/94769696083" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-neon transition-colors"><MessageCircle className="h-3.5 w-3.5 text-neon" /> WhatsApp priority</a>
             </div>
           </div>
         </motion.div>

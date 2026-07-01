@@ -173,12 +173,15 @@ export function Footer() {
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-2"><LogoMark /><span className="font-display text-lg font-semibold">Nexus<span className="text-neon">.</span></span></div>
-            <p className="mt-4 max-w-sm text-sm text-muted-foreground">Nexus Solutions is the technology division of The Matrices Pvt Ltd, delivering software engineering, AI solutions, automation systems, and digital transformation services for modern businesses.</p>
-            <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">Colombo · Badulla · Sri Lanka</p>
+            <p className="mt-4 max-w-sm text-sm text-muted-foreground">
+              The Tech Division of The Matrices Pvt Ltd,<br />
+              Building Technology That Drives Business.
+            </p>
+            <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">Colombo · Badulla · Global</p>
           </div>
           <FooterCol title="Company" links={[["About", "/about"], ["Services", "/services"], ["Careers", "/careers"], ["Contact", "/contact"]]} />
           <FooterCol title="Product" links={[["ALLFIX", "/allfix"], ["Case Studies", "/#case-studies"], ["Team", "/#team"]]} />
-          <FooterCol title="Connect" links={[["WhatsApp", "/contact"], ["Email", "/contact"], ["Book a call", "/contact"]]} />
+          <FooterCol title="Connect" links={[["WhatsApp", "https://wa.me/94769696083"], ["Email", "mailto:hello@nexus.lk"], ["Book a call", "/contact"]]} />
         </div>
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} Nexus Solutions — The Matrices Pvt Ltd. All rights reserved.</p>
@@ -194,11 +197,22 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
     <div>
       <h4 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{title}</h4>
       <ul className="space-y-2">
-        {links.map(([label, to]) => (
-          <li key={label}>
-            <Link to={to} className="text-sm text-foreground/80 transition-colors hover:text-neon">{label}</Link>
-          </li>
-        ))}
+        {links.map(([label, to]) => {
+          const isExternal = to.startsWith("http") || to.startsWith("mailto:");
+          return (
+            <li key={label}>
+              {isExternal ? (
+                <a href={to} target={to.startsWith("http") ? "_blank" : undefined} rel={to.startsWith("http") ? "noopener noreferrer" : undefined} className="text-sm text-foreground/80 transition-colors hover:text-neon">
+                  {label}
+                </a>
+              ) : (
+                <Link to={to} className="text-sm text-foreground/80 transition-colors hover:text-neon">
+                  {label}
+                </Link>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
