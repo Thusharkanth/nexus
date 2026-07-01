@@ -1,6 +1,6 @@
 import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
 import { FinalCTA } from "@/components/sections/Sections";
-import { ArrowUpRight, ArrowRight, Box, Code, PenTool, Rocket, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Box, Code, PenTool, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 

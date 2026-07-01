@@ -8,6 +8,7 @@ const NAV = [
   { label: "Portfolio", to: "/portfolio" },
   { label: "ALLFIX", to: "/allfix" },
   { label: "About", to: "/about" },
+  { label: "Careers", to: "/careers" },
   { label: "Contact", to: "/contact" },
 ];
 
@@ -24,15 +25,15 @@ export function ScrollProgress() {
 
 export function CursorGlow() {
   const [pos, setPos] = useState({ x: -200, y: -200 });
-  const [enabled, setEnabled] = useState(true);
+  const [enabled] = useState(() =>
+    typeof window !== "undefined" ? window.matchMedia("(pointer: fine)").matches : true
+  );
   useEffect(() => {
-    const isFine = window.matchMedia("(pointer: fine)").matches;
-    setEnabled(isFine);
-    if (!isFine) return;
+    if (!enabled) return;
     const handler = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", handler);
     return () => window.removeEventListener("mousemove", handler);
-  }, []);
+  }, [enabled]);
   if (!enabled) return null;
   return (
     <div
@@ -49,8 +50,14 @@ export function CursorGlow() {
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
   const location = useLocation();
+  const [prevPathname, setPrevPathname] = useState(location.pathname);
+  const [open, setOpen] = useState(false);
+
+  if (location.pathname !== prevPathname) {
+    setPrevPathname(location.pathname);
+    setOpen(false);
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -58,9 +65,6 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  // Close mobile menu on route change
-  useEffect(() => { setOpen(false); }, [location.pathname]);
 
   return (
     <>
@@ -172,7 +176,7 @@ export function Footer() {
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">Nexus Solutions is the technology division of The Matrices Pvt Ltd, delivering software engineering, AI solutions, automation systems, and digital transformation services for modern businesses.</p>
             <p className="mt-6 text-xs uppercase tracking-[0.2em] text-muted-foreground">Colombo · Badulla · Sri Lanka</p>
           </div>
-          <FooterCol title="Company" links={[["About", "/about"], ["Services", "/services"], ["Contact", "/contact"]]} />
+          <FooterCol title="Company" links={[["About", "/about"], ["Services", "/services"], ["Careers", "/careers"], ["Contact", "/contact"]]} />
           <FooterCol title="Product" links={[["ALLFIX", "/allfix"], ["Case Studies", "/#case-studies"], ["Team", "/#team"]]} />
           <FooterCol title="Connect" links={[["WhatsApp", "/contact"], ["Email", "/contact"], ["Book a call", "/contact"]]} />
         </div>

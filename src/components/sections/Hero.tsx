@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState, useMemo } from "react";
-import { ArrowDown, ArrowUpRight, Play } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { ArrowUpRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { MagneticButton } from "@/components/SiteChrome";
 
@@ -237,14 +237,14 @@ function FloatingShapes() {
 }
 
 function TransitionParticles({ show }: { show: boolean }) {
-  const particles = useMemo(() => {
-    return Array.from({ length: 40 }).map(() => ({
+  const [particles] = useState(() =>
+    Array.from({ length: 40 }).map(() => ({
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 3 + 1.5,
       duration: Math.random() * 1.5 + 1,
-    }));
-  }, []);
+    }))
+  );
 
   return (
     <motion.div

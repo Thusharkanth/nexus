@@ -43,20 +43,25 @@ export default function PortfolioCategory() {
   const { category } = useParams<{ category: string }>();
   const practiceKey = category && CATEGORY_CONFIG[category] ? category : DEFAULT_KEY;
   const config = CATEGORY_CONFIG[practiceKey];
-  const practiceProjects = PROJECTS_BY_PRACTICE[practiceKey] ?? [];
 
+  const [prevPracticeKey, setPrevPracticeKey] = useState(practiceKey);
   const [activeFilter, setActiveFilter] = useState("All Projects");
 
-  // Reset filter & scroll when route changes
-  useEffect(() => {
+  if (practiceKey !== prevPracticeKey) {
+    setPrevPracticeKey(practiceKey);
     setActiveFilter("All Projects");
+  }
+
+  // Reset scroll when route changes
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [practiceKey]);
 
   const filteredProjects = useMemo(() => {
+    const practiceProjects = PROJECTS_BY_PRACTICE[practiceKey] ?? [];
     if (activeFilter === "All Projects") return practiceProjects;
     return practiceProjects.filter((p) => p.category === activeFilter);
-  }, [activeFilter, practiceProjects]);
+  }, [activeFilter, practiceKey]);
 
   const featuredProjects = filteredProjects.filter((p) => p.featured);
   const moreProjects = filteredProjects.filter((p) => !p.featured);
