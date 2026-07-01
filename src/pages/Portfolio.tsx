@@ -1,4 +1,5 @@
 import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
+import { FloatingShapes } from "@/components/FloatingShapes";
 import { FinalCTA } from "@/components/sections/Sections";
 import { ArrowUpRight, ArrowRight, Box, Code, PenTool, Rocket, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -37,6 +38,7 @@ const PRACTICES = [
 export default function Portfolio() {
   return (
     <div className="relative">
+      <FloatingShapes />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />

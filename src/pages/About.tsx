@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Target, Eye, Heart } from "lucide-react";
 import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
+import { FloatingShapes } from "@/components/FloatingShapes";
 
 export default function About() {
   return (
     <div className="relative">
+      <FloatingShapes />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
@@ -17,12 +19,10 @@ export default function About() {
             <span className="h-1.5 w-1.5 rounded-full bg-neon glow-neon" /> About us
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
-            We build systems that <span className="text-gradient">compound over time.</span>
+            Technology Partner for <span className="text-gradient">Modern Businesses.</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="mt-8 max-w-2xl text-lg text-muted-foreground">
-            Nexus Solutions is the IT & Technology division of The Matrices Pvt Ltd.
-            We deliver affordable, high-quality technology that helps businesses modernize,
-            automate, and scale — anchored in trust, reliability, and measurable results.
+            Nexus Solutions is the technology division of The Matrices Pvt Ltd, helping growing businesses modernize operations, automate workflows, and scale through intelligent software, AI, and digital transformation solutions.
           </motion.p>
         </div>
       </section>
@@ -31,8 +31,8 @@ export default function About() {
         <div className="mx-auto max-w-5xl grid gap-6 md:grid-cols-3">
           {[
             { icon: Eye, t: "Vision", d: "To be a leading technology and digital transformation partner recognized for innovation, excellence, and creating sustainable growth for businesses worldwide." },
-            { icon: Target, t: "Mission", d: "Deliver affordable, high-quality technology that helps businesses modernize, automate, and scale — through AI, software, cloud, and digital transformation." },
-            { icon: Heart, t: "Values", d: "Trust, reliability, innovation, and long-term partnership. We measure ourselves by your outcomes." },
+              { icon: Target, t: "Mission", d: "Deliver affordable, high-quality technology that helps businesses modernize, automate, and scale through AI, software, cloud, and digital transformation." },
+              { icon: Heart, t: "Values", d: "Trust, reliability, innovation, and long-term partnerships built around measurable outcomes." },
           ].map((c, i) => (
             <motion.div key={c.t} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-2xl border border-border bg-surface/50 p-7">
               <c.icon className="h-7 w-7 text-neon" />
