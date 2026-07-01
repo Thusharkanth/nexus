@@ -1,5 +1,4 @@
 import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
-import { FloatingShapes } from "@/components/FloatingShapes";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Mail, MessageCircle, Calendar, MapPin, ArrowUpRight, Check } from "lucide-react";
@@ -8,7 +7,6 @@ export default function Contact() {
   const [sent, setSent] = useState(false);
   return (
     <div className="relative">
-      <FloatingShapes />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />

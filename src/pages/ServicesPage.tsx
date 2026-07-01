@@ -1,12 +1,10 @@
 import { Navbar, Footer, ScrollProgress, CursorGlow } from "@/components/SiteChrome";
-import { FloatingShapes } from "@/components/FloatingShapes";
 import { Services, FinalCTA, Process } from "@/components/sections/Sections";
 import { motion } from "framer-motion";
 
 export default function ServicesPage() {
   return (
     <div className="relative">
-      <FloatingShapes />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />

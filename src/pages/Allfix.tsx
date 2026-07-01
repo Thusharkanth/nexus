@@ -1,5 +1,4 @@
 import { Navbar, Footer, ScrollProgress, CursorGlow } from "@/components/SiteChrome";
-import { FloatingShapes } from "@/components/FloatingShapes";
 import { AllfixHighlight, FinalCTA, FAQ } from "@/components/sections/Sections";
 import { motion } from "framer-motion";
 import { Wrench } from "lucide-react";
@@ -7,7 +6,6 @@ import { Wrench } from "lucide-react";
 export default function Allfix() {
   return (
     <div className="relative">
-      <FloatingShapes />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />

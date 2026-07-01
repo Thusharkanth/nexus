@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Maximize2, MoveRight } from "lucide-react";
 import { Navbar, Footer, ScrollProgress, CursorGlow } from "@/components/SiteChrome";
-import { FloatingShapes } from "@/components/FloatingShapes";
 import { FinalCTA } from "@/components/sections/Sections";
 import { PROJECTS_BY_PRACTICE, Project } from "@/data/portfolioData";
 
@@ -64,7 +63,6 @@ export default function PortfolioCategory() {
 
   return (
     <div className="relative">
-      <FloatingShapes />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />

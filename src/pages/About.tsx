@@ -2,12 +2,10 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Target, Eye, Heart } from "lucide-react";
 import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
-import { FloatingShapes } from "@/components/FloatingShapes";
 
 export default function About() {
   return (
     <div className="relative">
-      <FloatingShapes />
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
