@@ -29,8 +29,8 @@ export default function About() {
         <div className="mx-auto max-w-5xl grid gap-6 md:grid-cols-3">
           {[
             { icon: Eye, t: "Vision", d: "To be a leading technology and digital transformation partner recognized for innovation, excellence, and creating sustainable growth for businesses worldwide." },
-              { icon: Target, t: "Mission", d: "Deliver affordable, high-quality technology that helps businesses modernize, automate, and scale through AI, software, cloud, and digital transformation." },
-              { icon: Heart, t: "Values", d: "Trust, reliability, innovation, and long-term partnerships built around measurable outcomes." },
+            { icon: Target, t: "Mission", d: "We deliver affordable, high-quality technology solutions that help businesses modernize, automate, and scale. Through AI, software development, cloud technologies, and digital transformation services, we solve real business challenges while providing a premium customer experience. We build long-term partnerships founded on trust, reliability, innovation, and measurable results." },
+            { icon: Heart, t: "Values", d: "Trust, reliability, innovation, and long-term partnerships built around measurable outcomes." },
           ].map((c, i) => (
             <motion.div key={c.t} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-2xl border border-border bg-surface/50 p-7">
               <c.icon className="h-7 w-7 text-neon" />

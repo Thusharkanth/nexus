@@ -19,7 +19,7 @@ export default function ServicesPage() {
           </motion.p>
         </div>
       </section>
-      <Services />
+      <Services showViewAll={false} />
       <Process />
       <FinalCTA />
       <Footer />

@@ -61,7 +61,7 @@ export default function Portfolio() {
               transition={{ duration: 0.7, delay: 0.05 }}
               className="font-display text-balance text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:px-12"
             >
-              Work that compounds — crafted across <span className="text-gradient">three practices.</span>
+              Work That Ships. <span className="text-gradient">Work That Scales.</span>
             </motion.h1>
 
             <motion.p
@@ -70,8 +70,8 @@ export default function Portfolio() {
               transition={{ duration: 0.7, delay: 0.1 }}
               className="mx-auto mt-8 max-w-2xl text-balance text-lg text-muted-foreground"
             >
-              From brand systems and product design to AI platforms and original SaaS —
-              every project we ship is engineered to outlast the launch.
+              From custom software and AI systems to SaaS platforms and digital products,
+              everything we build is engineered for performance, scalability, and real-world impact.
             </motion.p>
 
             <motion.div

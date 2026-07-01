@@ -2,6 +2,7 @@ import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/co
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Mail, MessageCircle, Calendar, MapPin, ArrowUpRight, Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -23,19 +24,45 @@ export default function Contact() {
 
             <div className="mt-10 space-y-4">
               {[
-                { icon: Mail, label: "Email", value: "01nexus.solutions@gmail.com" },
-                { icon: MessageCircle, label: "WhatsApp", value: "Priority channel · 24/7" },
-                { icon: Calendar, label: "Schedule Consultation", value: "30-minute consultation" },
-                { icon: MapPin, label: "Studios", value: "Colombo · Badulla, Sri Lanka" },
-              ].map((c) => (
-                <div key={c.label} className="flex items-center gap-4 rounded-2xl border border-border bg-surface/50 p-4">
-                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-neon/10 text-neon"><c.icon className="h-5 w-5" /></div>
-                  <div>
-                    <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{c.label}</div>
-                    <div className="font-medium">{c.value}</div>
+                { icon: Mail, label: "Email", value: "hello@nexus.lk", href: "mailto:hello@nexus.lk", isExternal: true },
+                { icon: MessageCircle, label: "WhatsApp", value: "Priority channel · 24/7", href: "https://wa.me/94769696083", isExternal: true },
+                { icon: Calendar, label: "Schedule Consultation", value: "30-minute consultation", href: "/contact", isExternal: false },
+                { icon: MapPin, label: "Studios", value: "Colombo · Badulla · Global", href: "", isExternal: false },
+              ].map((c) => {
+                const content = (
+                  <div className="flex items-center gap-4">
+                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-neon/10 text-neon"><c.icon className="h-5 w-5" /></div>
+                    <div>
+                      <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">{c.label}</div>
+                      <div className="font-medium">{c.value}</div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+
+                const baseClass = "flex items-center gap-4 rounded-2xl border border-border bg-surface/50 p-4 transition-colors hover:bg-surface hover:border-neon/30 cursor-pointer w-full text-left";
+
+                if (c.href) {
+                  if (c.isExternal) {
+                    return (
+                      <a key={c.label} href={c.href} target="_blank" rel="noopener noreferrer" className={baseClass}>
+                        {content}
+                      </a>
+                    );
+                  } else {
+                    return (
+                      <Link key={c.label} to={c.href} className={baseClass}>
+                        {content}
+                      </Link>
+                    );
+                  }
+                }
+
+                return (
+                  <div key={c.label} className="flex items-center gap-4 rounded-2xl border border-border bg-surface/50 p-4">
+                    {content}
+                  </div>
+                );
+              })}
             </div>
           </div>
 
