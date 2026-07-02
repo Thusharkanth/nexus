@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { useRef, useEffect, useState, useMemo } from "react";
-import { ArrowDown, ArrowUpRight, Play } from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import { ArrowUpRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { MagneticButton } from "@/components/SiteChrome";
 
@@ -146,18 +146,29 @@ export function Hero() {
             <h1 className="font-display text-[clamp(1.8rem,5.8vw,4.6rem)] font-bold leading-[0.95] tracking-tight text-balance">
               <RevealWords text="Engineering the" delay={0.3} />
               <br />
+<<<<<<< HEAD
               <RevealWords text="Future of Business" delay={0.5} className="text-gradient" />
+=======
+              <RevealWords text="Future of" delay={0.5} className="text-muted-foreground/80" />
+              <span className="ml-2 sm:ml-3 inline-block">
+                <RevealWords text="Business." delay={0.7} className="text-gradient" />
+              </span>
+>>>>>>> 248e6470982bb95ce5ca8eb5d12e677d155d6616
             </h1>
 
-            <motion.p
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 1 }}
-              className="mt-5 sm:mt-6 max-w-xl text-sm text-muted-foreground sm:text-base text-balance"
+              className="mt-5 sm:mt-6 max-w-xl text-balance"
             >
-              We help growing businesses transform operations through custom software, AI solutions,
-              automation, and digital innovation, delivering measurable results without enterprise-level complexity.
-            </motion.p>
+              <p className="text-base font-semibold text-foreground sm:text-lg">
+                The technology partner behind tomorrow's possibilities.
+              </p>
+              <p className="mt-2.5 text-sm text-muted-foreground sm:text-base">
+                We design and build intelligent software, AI solutions, and digital products that empower businesses to innovate, scale, and create lasting impact.
+              </p>
+            </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -189,10 +200,10 @@ export function Hero() {
             className="mt-10 sm:mt-14 grid max-w-3xl grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-6 border-t border-border/60 pt-5 sm:pt-6 sm:grid-cols-4"
           >
             {[
-              ["50+", "Projects shipped"],
-              ["12", "Industries served"],
-              ["2", "Global locations"],
-              ["24/7", "Partner support"],
+              ["500+", "Projects Delivered"],
+              ["10+", "Industries Served"],
+              ["50+", "Countries Served"],
+              ["24/7", "Partner Support"],
             ].map(([v, l]) => (
               <div key={l}>
                 <div className="font-display text-2xl font-semibold text-foreground sm:text-3xl">{v}</div>
@@ -234,14 +245,14 @@ function FloatingShapes() {
 }
 
 function TransitionParticles({ show }: { show: boolean }) {
-  const particles = useMemo(() => {
-    return Array.from({ length: 40 }).map(() => ({
+  const [particles] = useState(() =>
+    Array.from({ length: 40 }).map(() => ({
       x: Math.random() * 100,
       y: Math.random() * 100,
       size: Math.random() * 3 + 1.5,
       duration: Math.random() * 1.5 + 1,
-    }));
-  }, []);
+    }))
+  );
 
   return (
     <motion.div

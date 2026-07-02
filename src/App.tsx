@@ -8,6 +8,7 @@ import Contact from "@/pages/Contact";
 import Allfix from "@/pages/Allfix";
 import Portfolio from "@/pages/Portfolio";
 import PortfolioCategory from "@/pages/PortfolioCategory";
+import Careers from "@/pages/Careers";
 import { IntroVideo } from "@/components/IntroVideo";
 
 function ScrollToTopOnRouteChange() {
@@ -52,6 +53,7 @@ function AppRoutes({ introComplete }: { introComplete: boolean }) {
         <Route path="/services" element={<ServicesPage />} />
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/portfolio/:category" element={<PortfolioCategory />} />
+        <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/allfix" element={<Allfix />} />
       </Routes>
