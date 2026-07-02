@@ -5,9 +5,16 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
     },
+  },
+
+  server: {
+    host: true,
+    allowedHosts: 'all',
+    strictPort: true,
   },
 })

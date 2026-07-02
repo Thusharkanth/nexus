@@ -144,12 +144,9 @@ export function Hero() {
             </motion.div>
 
             <h1 className="font-display text-[clamp(1.8rem,5.8vw,4.6rem)] font-bold leading-[0.95] tracking-tight text-balance">
-              <RevealWords text="Technology That Helps" delay={0.3} />
+              <RevealWords text="Engineering the" delay={0.3} />
               <br />
-              <RevealWords text="Businesses Grow," delay={0.5} className="text-muted-foreground/80" />
-              <span className="inline-block">
-                <RevealWords text="Automate, and Scale" delay={0.7} className="text-gradient" />
-              </span>
+              <RevealWords text="Future of Business" delay={0.5} className="text-gradient" />
             </h1>
 
             <motion.p
