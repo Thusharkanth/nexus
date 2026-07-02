@@ -75,9 +75,12 @@ export function Navbar() {
         className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? "py-3" : "py-5"}`}
       >
         <div className={`mx-auto flex max-w-7xl items-center justify-between rounded-full px-5 py-3 transition-all duration-500 sm:px-6 ${scrolled ? "mx-4 sm:mx-auto bg-surface shadow-lg shadow-black/40 border border-border/50" : "bg-transparent"}`}>
-          <Link to="/" className="group flex items-center gap-2">
-            <LogoMark />
-            <span className="font-display text-base font-semibold tracking-tight">Nexus<span className="text-neon">.</span></span>
+          <Link to="/" className="group flex items-center relative w-36 md:w-48 h-8">
+            <img 
+              src="/logo/Nexus-01.png" 
+              alt="Nexus Logo" 
+              className="absolute left-0 top-1/2 -translate-y-[44%] h-24 md:h-28 lg:h-36 w-auto max-w-none origin-left drop-shadow-xl" 
+            />
           </Link>
           <nav className="hidden items-center gap-1 md:flex">
             {NAV.map((n) => (
@@ -114,7 +117,7 @@ export function Navbar() {
             className="fixed inset-0 z-[70] bg-background/95 backdrop-blur-xl md:hidden"
           >
             <div className="flex items-center justify-between p-5">
-              <div className="flex items-center gap-2"><LogoMark /><span className="font-display font-semibold">Nexus<span className="text-neon">.</span></span></div>
+              <div className="flex items-center"><LogoMark className="h-10" /></div>
               <button aria-label="Close menu" onClick={() => setOpen(false)} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border"><X className="h-5 w-5" /></button>
             </div>
             <div className="flex flex-col gap-2 px-6 pt-10">
@@ -138,12 +141,11 @@ export function Navbar() {
 
 export function LogoMark({ className = "" }: { className?: string }) {
   return (
-    <span className={`relative grid h-8 w-8 place-items-center rounded-lg bg-neon/10 ring-1 ring-neon/40 ${className}`}>
-      <span className="absolute inset-0 rounded-lg bg-neon/20 blur-md" />
-      <svg viewBox="0 0 24 24" className="relative h-4 w-4 text-neon" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 20 L4 4 L20 20 L20 4" />
-      </svg>
-    </span>
+    <img 
+      src="/logo/Nexus-01.png" 
+      alt="Nexus Logo" 
+      className={`h-8 w-auto object-contain ${className}`} 
+    />
   );
 }
 
@@ -172,7 +174,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
-            <div className="flex items-center gap-2"><LogoMark /><span className="font-display text-lg font-semibold">Nexus<span className="text-neon">.</span></span></div>
+            <div className="flex items-center"><LogoMark /></div>
             <p className="mt-4 max-w-sm text-sm text-muted-foreground">
               The Tech Division of The Matrices Pvt Ltd,<br />
               Building Technology That Drives Business.
@@ -181,7 +183,7 @@ export function Footer() {
           </div>
           <FooterCol title="Company" links={[["About", "/about"], ["Services", "/services"], ["Careers", "/careers"], ["Contact", "/contact"]]} />
           <FooterCol title="Product" links={[["ALLFIX", "/allfix"], ["Case Studies", "/#case-studies"], ["Team", "/#team"]]} />
-          <FooterCol title="Connect" links={[["WhatsApp", "https://wa.me/94769696083"], ["Email", "mailto:hello@nexus.lk"], ["Book a call", "/contact"]]} />
+          <FooterCol title="Connect" links={[["WhatsApp", "https://wa.me/94769696083"], ["Email", "mailto:01nexus.solutions@gmail.com"], ["Book a call", "/contact"]]} />
         </div>
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-border pt-8 text-xs text-muted-foreground md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} Nexus Solutions — The Matrices Pvt Ltd. All rights reserved.</p>
@@ -214,6 +216,45 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
           );
         })}
       </ul>
+    </div>
+  );
+}
+
+export function SpaceParticles({ count = 40 }: { count?: number }) {
+  const [particles] = useState(() =>
+    Array.from({ length: count }).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 1.5 + 0.5,
+      opacity: Math.random() * 0.4 + 0.1,
+      duration: Math.random() * 15 + 15,
+    }))
+  );
+
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      {particles.map((p, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-white"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            opacity: p.opacity,
+          }}
+          animate={{
+            y: ["0%", "-50%"],
+            opacity: [p.opacity, p.opacity * 1.2, p.opacity],
+          }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      ))}
     </div>
   );
 }

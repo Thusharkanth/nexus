@@ -1,4 +1,4 @@
-import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
+import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton, SpaceParticles } from "@/components/SiteChrome";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { 
@@ -106,7 +106,8 @@ export default function Careers() {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative px-6 pb-20 pt-44 sm:pt-52">
+      <section className="relative px-6 pb-20 pt-44 sm:pt-52 overflow-hidden">
+        <SpaceParticles />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[80vh] radial-glow opacity-60" />
         <div className="mx-auto max-w-5xl text-center">
           <motion.div 

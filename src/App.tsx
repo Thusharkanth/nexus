@@ -62,24 +62,10 @@ function AppRoutes({ introComplete }: { introComplete: boolean }) {
 }
 
 export default function App() {
-  // Show intro only on "/" and only once per session
-  const skipIntro = sessionStorage.getItem("nexus_intro_played") === "true";
-  const [introComplete, setIntroComplete] = useState(skipIntro);
-  const [showIntro, setShowIntro] = useState(!skipIntro);
-
-  const handleIntroComplete = () => {
-    sessionStorage.setItem("nexus_intro_played", "true");
-    setShowIntro(false);
-    setIntroComplete(true);
-  };
-
   return (
     <BrowserRouter>
       <ScrollToTopOnRouteChange />
-      {showIntro && (
-        <IntroVideo onComplete={handleIntroComplete} />
-      )}
-      <AppRoutes introComplete={introComplete} />
+      <AppRoutes introComplete={true} />
     </BrowserRouter>
   );
 }

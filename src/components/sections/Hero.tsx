@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { ArrowUpRight, Play } from "lucide-react";
 import { Link } from "react-router-dom";
-import { MagneticButton } from "@/components/SiteChrome";
+import { MagneticButton, SpaceParticles } from "@/components/SiteChrome";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
@@ -111,9 +111,14 @@ export function Hero() {
           className="pointer-events-none absolute bottom-0 left-0 right-0 h-48 z-20"
           style={{
             background:
-              "linear-gradient(to top, var(--background) 0%, rgba(0,0,0,0.5) 60%, transparent 100%)",
+              "linear-gradient(to top, #000000 0%, rgba(0,0,0,0.5) 60%, transparent 100%)",
           }}
         />
+
+        {/* Space Particles Overlay */}
+        <div className="absolute inset-0 z-[15] pointer-events-none opacity-80 mix-blend-screen">
+          <SpaceParticles />
+        </div>
 
         {/* Floating shapes */}
         <FloatingShapes />
@@ -204,7 +209,7 @@ export function Hero() {
               ["24/7", "Partner Support"],
             ].map(([v, l]) => (
               <div key={l}>
-                <div className="font-display text-2xl font-semibold text-foreground sm:text-3xl">{v}</div>
+                <div className="font-display text-xl font-semibold text-foreground sm:text-2xl">{v}</div>
                 <div className="mt-1 text-xs uppercase tracking-[0.18em] text-muted-foreground">{l}</div>
               </div>
             ))}

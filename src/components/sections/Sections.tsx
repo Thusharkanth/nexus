@@ -172,7 +172,7 @@ const SERVICES = [
   { icon: Cpu, title: "Custom Software", desc: "Bespoke systems tailored to your operations." },
   { icon: Cloud, title: "SaaS Development", desc: "Multi-tenant platforms ready for global growth." },
   { icon: Bot, title: "AI Chatbots", desc: "Conversational agents trained on your business." },
-  { icon: Sparkles, title: "AI Automation", desc: "Eliminate repetitive work with intelligent workflows." },
+  { icon: Sparkles, title: "AI Automation", desc: "Automate repetitive workflows across ops, support, and sales with AI agents and smart process orchestration." },
   { icon: Zap, title: "AI Integration", desc: "Embed AI into the tools your team already uses." },
   { icon: LineChart, title: "Data Science & Analytics", desc: "Decisions backed by signal, not guesswork." },
   { icon: Palette, title: "UI/UX Design", desc: "Interfaces that feel inevitable." },
@@ -181,6 +181,16 @@ const SERVICES = [
 ];
 
 export function Services({ showViewAll = true }: { showViewAll?: boolean }) {
+  const featuredServices = [
+    SERVICES[0],
+    SERVICES[1],
+    SERVICES[2],
+    SERVICES[3],
+    SERVICES[4],
+    SERVICES[6], // Show AI Automation as the last featured card
+  ];
+  const displayServices = showViewAll ? featuredServices : SERVICES;
+
   return (
     <section id="services" className="relative px-6 py-32 sm:py-40">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
@@ -188,21 +198,40 @@ export function Services({ showViewAll = true }: { showViewAll?: boolean }) {
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionHeader
             eyebrow="What we do"
+            align="center"
             title={<>Engineering Solutions That Create <span className="text-gradient">Business Value.</span></>}
             sub="From intelligent software and AI-powered systems to digital products and automation, we build technology that helps businesses operate smarter, scale faster, and stay ahead."
           />
-          {showViewAll && (
-            <Link to="/services" className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-neon">
-              View all services <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          )}
         </div>
 
         <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s, i) => (
+          {displayServices.map((s, i) => (
             <ServiceCard key={s.title} {...s} index={i} />
           ))}
         </div>
+
+        {showViewAll && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-12 relative overflow-hidden rounded-2xl border border-border bg-surface/30 p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 hover:border-neon/30 transition-colors duration-300"
+          >
+            <div className="absolute right-0 top-0 -mt-16 -mr-16 h-64 w-64 rounded-full bg-neon/10 blur-3xl pointer-events-none" />
+            <div className="relative z-10 text-center md:text-left">
+              <h3 className="font-display text-xl font-semibold text-foreground">Need something else?</h3>
+              <p className="mt-2 text-muted-foreground max-w-2xl text-[15px] leading-relaxed">
+                We provide <strong className="text-foreground font-semibold">12+ engineering services</strong> including SaaS, Data Science, Digital Transformation, AI Integration, IT Consulting, and more.
+              </p>
+            </div>
+            <Link to="/services" className="relative z-10 shrink-0">
+              <MagneticButton>
+                Explore All Services <ArrowUpRight className="h-4 w-4" />
+              </MagneticButton>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   );
@@ -262,7 +291,7 @@ export function AllfixHighlight() {
   const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
-    <section id="allfix" ref={ref} className="relative px-6 py-32 sm:py-40">
+    <section id="allfix" ref={ref} className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="relative overflow-hidden rounded-[2rem] border border-border bg-surface p-8 sm:p-12 lg:p-16">
           <div className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-neon/20 blur-3xl" />
@@ -365,7 +394,7 @@ const WHY = [
 
 export function WhyChoose() {
   return (
-    <section className="relative px-6 py-32 sm:py-40">
+    <section className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="Why Nexus"
@@ -424,7 +453,7 @@ const CASES = [
 
 export function CaseStudies() {
   return (
-    <section id="case-studies" className="relative px-6 py-32 sm:py-40">
+    <section id="case-studies" className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionHeader
@@ -480,7 +509,7 @@ export function Process() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 80%", "end 20%"] });
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   return (
-    <section className="relative px-6 py-32 sm:py-40">
+    <section className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <SectionHeader
           eyebrow="How we work"
@@ -518,7 +547,7 @@ export function Process() {
 /* ----------------- Team ----------------- */
 export function Team() {
   return (
-    <section id="team" className="relative px-6 py-32 sm:py-40">
+    <section id="team" className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           eyebrow="The team"
@@ -567,7 +596,7 @@ export function Testimonials() {
     return () => clearInterval(t);
   }, []);
   return (
-    <section className="relative px-6 py-32 sm:py-40">
+    <section className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-4xl text-center">
         <SectionHeader eyebrow="Said about us" title={<>Trusted to <span className="text-gradient">deliver.</span></>} align="center" />
         <div className="relative mt-16 min-h-[180px]">
@@ -606,7 +635,7 @@ const FAQS = [
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section className="relative px-6 py-32 sm:py-40">
+    <section className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-4xl">
         <SectionHeader eyebrow="FAQ" title={<>Questions, <span className="text-gradient">answered.</span></>} align="center" />
         <div className="mt-12 space-y-3">
@@ -647,7 +676,7 @@ export function FAQ() {
 /* ----------------- Final CTA ----------------- */
 export function FinalCTA() {
   return (
-    <section id="cta" className="relative px-6 py-32 sm:py-40">
+    <section id="cta" className="relative px-6 py-20 sm:py-24">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -679,7 +708,7 @@ export function FinalCTA() {
               </a>
             </div>
             <div className="mt-12 flex flex-wrap items-center justify-center gap-8 text-xs uppercase tracking-[0.2em] text-muted-foreground">
-              <a href="mailto:hello@nexus.lk" className="inline-flex items-center gap-2 hover:text-neon transition-colors"><Mail className="h-3.5 w-3.5 text-neon" /> hello@nexus.lk</a>
+              <a href="mailto:01nexus.solutions@gmail.com" className="inline-flex items-center gap-2 hover:text-neon transition-colors"><Mail className="h-3.5 w-3.5 text-neon" /> 01nexus.solutions@gmail.com</a>
               <Link to="/contact" className="inline-flex items-center gap-2 hover:text-neon transition-colors"><Calendar className="h-3.5 w-3.5 text-neon" /> Book a call</Link>
               <a href="https://wa.me/94769696083" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:text-neon transition-colors"><MessageCircle className="h-3.5 w-3.5 text-neon" /> WhatsApp priority</a>
             </div>

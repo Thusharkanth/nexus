@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Maximize2, MoveRight } from "lucide-react";
-import { Navbar, Footer, ScrollProgress, CursorGlow } from "@/components/SiteChrome";
+import { Navbar, Footer, ScrollProgress, CursorGlow, SpaceParticles } from "@/components/SiteChrome";
 import { FinalCTA } from "@/components/sections/Sections";
 import { PROJECTS_BY_PRACTICE, Project } from "@/data/portfolioData";
 
@@ -72,10 +72,11 @@ export default function PortfolioCategory() {
       <CursorGlow />
       <Navbar />
 
-      <main className="pt-32 sm:pt-40 pb-20 min-h-screen">
+      <main className="pb-20 min-h-screen">
         {/* ──────── Hero ──────── */}
-        <section className="px-6 mb-20 sm:mb-32">
-          <div className="mx-auto max-w-5xl text-center flex flex-col items-center">
+        <section className="px-6 pb-20 pt-48 sm:pt-56 mb-20 sm:mb-32 relative overflow-hidden">
+          <SpaceParticles />
+          <div className="mx-auto max-w-5xl text-center flex flex-col items-center relative z-10">
             {/* Breadcrumb */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}

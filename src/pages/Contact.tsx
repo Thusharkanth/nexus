@@ -1,4 +1,4 @@
-import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
+import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton, SpaceParticles } from "@/components/SiteChrome";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Mail, MessageCircle, Calendar, MapPin, ArrowUpRight, Check } from "lucide-react";
@@ -11,9 +11,10 @@ export default function Contact() {
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
-      <section className="relative px-6 pb-32 pt-44 sm:pt-52">
+      <section className="relative px-6 pb-32 pt-44 sm:pt-52 overflow-hidden">
+        <SpaceParticles />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[70vh] radial-glow opacity-70" />
-        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.1fr_0.9fr] relative z-10">
           <div>
             <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="font-display text-balance text-5xl font-semibold leading-[1.02] sm:text-6xl md:text-7xl">
               Let's Build What's <span className="text-gradient">Next.</span>
@@ -24,7 +25,7 @@ export default function Contact() {
 
             <div className="mt-10 space-y-4">
               {[
-                { icon: Mail, label: "Email", value: "hello@nexus.lk", href: "mailto:hello@nexus.lk", isExternal: true },
+                { icon: Mail, label: "Email", value: "01nexus.solutions@gmail.com", href: "mailto:01nexus.solutions@gmail.com", isExternal: true },
                 { icon: MessageCircle, label: "WhatsApp", value: "Priority channel · 24/7", href: "https://wa.me/94769696083", isExternal: true },
                 { icon: Calendar, label: "Schedule Consultation", value: "30-minute consultation", href: "/contact", isExternal: false },
                 { icon: MapPin, label: "Studios", value: "Colombo · Badulla · Global", href: "", isExternal: false },

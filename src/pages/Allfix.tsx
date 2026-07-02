@@ -1,4 +1,4 @@
-import { Navbar, Footer, ScrollProgress, CursorGlow } from "@/components/SiteChrome";
+import { Navbar, Footer, ScrollProgress, CursorGlow, SpaceParticles } from "@/components/SiteChrome";
 import { AllfixHighlight, FinalCTA, FAQ } from "@/components/sections/Sections";
 import { motion } from "framer-motion";
 import { Wrench } from "lucide-react";
@@ -9,9 +9,10 @@ export default function Allfix() {
       <ScrollProgress />
       <CursorGlow />
       <Navbar />
-      <section className="relative px-6 pb-12 pt-44 sm:pt-52">
+      <section className="relative px-6 pb-12 pt-44 sm:pt-52 overflow-hidden">
+        <SpaceParticles />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[70vh] radial-glow opacity-70" />
-        <div className="mx-auto max-w-5xl text-center">
+        <div className="mx-auto max-w-5xl text-center relative z-10">
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-neon/30 bg-neon/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-neon">
             <Wrench className="h-3.5 w-3.5" /> ALLFIX · SaaS
           </motion.div>

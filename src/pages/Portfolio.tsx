@@ -1,4 +1,4 @@
-import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
+import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton, SpaceParticles } from "@/components/SiteChrome";
 import { FinalCTA } from "@/components/sections/Sections";
 import { ArrowRight, Box, Code, PenTool, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ const PRACTICES = [
     num: "01",
     title: "Design & Marketing",
     icon: PenTool,
+    projects: "200+ Projects",
     desc: "We create memorable brands, engaging experiences, and creative visuals that connect with the right audience.",
     tags: ["Branding", "UI/UX Design", "Digital Marketing", "Creative Direction"],
     link: "/portfolio/design",
@@ -18,6 +19,7 @@ const PRACTICES = [
     num: "02",
     title: "Tech Solutions",
     icon: Code,
+    projects: "200+ Projects",
     desc: "Scalable systems, intelligent automation, and robust infrastructure to power modern businesses.",
     tags: ["Custom Software", "AI & Automation", "Cloud Architecture", "Enterprise Systems"],
     link: "/portfolio/tech",
@@ -27,6 +29,7 @@ const PRACTICES = [
     num: "03",
     title: "Our Products",
     icon: Box,
+    projects: "100+ Projects",
     desc: "Our in-house products and platforms built to solve real problems and drive meaningful change.",
     tags: ["SaaS Products", "AI Platforms", "Productivity Tools", "Internal Experiments"],
     link: "/portfolio/productions",
@@ -41,10 +44,11 @@ export default function Portfolio() {
       <CursorGlow />
       <Navbar />
 
-      <main className="pt-32 sm:pt-40 pb-20">
+      <main className="pb-20">
         {/* Hero Section */}
-        <section className="px-6 mb-32">
-          <div className="mx-auto max-w-4xl text-center">
+        <section className="px-6 pb-20 pt-48 sm:pt-56 mb-32 relative overflow-hidden">
+          <SpaceParticles />
+          <div className="mx-auto max-w-4xl text-center relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
@@ -68,7 +72,7 @@ export default function Portfolio() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="mx-auto mt-8 max-w-2xl text-balance text-lg text-muted-foreground"
+              className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground"
             >
               From custom software and AI systems to SaaS platforms and digital products,
               everything we build is engineered for performance, scalability, and real-world impact.
@@ -126,6 +130,9 @@ export default function Portfolio() {
                     </div>
 
                     <h3 className="font-display text-3xl md:text-4xl font-semibold text-white tracking-wide mb-4">{practice.title}</h3>
+                    <div className="mb-5 inline-flex items-center rounded-full border border-neon/35 bg-neon/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-neon">
+                      {practice.projects}
+                    </div>
                     <p className="text-base leading-relaxed text-muted-foreground/90 max-w-md mb-8">{practice.desc}</p>
 
                     <div className="flex flex-col gap-3 mb-12">

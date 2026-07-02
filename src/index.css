@@ -43,7 +43,7 @@
 /* ── #04d294 → oklch(0.76 0.17 162) ────────────────────────────────────── */
 :root {
   --radius: 1rem;
-  --background: #000000;
+  --background: #010201;
   --foreground: oklch(0.98 0.005 162);
   --surface: oklch(0.11 0.015 162);
   --surface-elevated: oklch(0.16 0.02 162);
@@ -76,6 +76,8 @@
   html { scroll-behavior: smooth; }
   body {
     background-color: var(--color-background);
+    background-image: radial-gradient(140% 100% at 50% -10%, oklch(0.76 0.17 162 / 0.02), transparent 100%);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;

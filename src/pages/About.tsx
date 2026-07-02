@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Target, Eye, Heart } from "lucide-react";
-import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton } from "@/components/SiteChrome";
+import { Navbar, Footer, ScrollProgress, CursorGlow, MagneticButton, SpaceParticles } from "@/components/SiteChrome";
 
 export default function About() {
   return (
@@ -10,16 +10,17 @@ export default function About() {
       <CursorGlow />
       <Navbar />
 
-      <section className="relative px-6 pb-20 pt-44 sm:pt-52">
+      <section className="relative px-6 pb-20 pt-44 sm:pt-52 overflow-hidden">
+        <SpaceParticles />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[80vh] radial-glow opacity-60" />
-        <div className="mx-auto max-w-5xl">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
+        <div className="mx-auto max-w-5xl relative z-10 text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-border bg-surface/50 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-neon glow-neon" /> About us
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="font-display text-balance text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl">
             Technology Partner for <span className="text-gradient">Modern Businesses.</span>
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="mt-8 max-w-2xl text-lg text-muted-foreground">
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.15 }} className="mx-auto mt-8 max-w-3xl text-lg text-muted-foreground">
             Nexus Solutions is the technology division of The Matrices Pvt Ltd, helping growing businesses modernize operations, automate workflows, and scale through intelligent software, AI, and digital transformation solutions.
           </motion.p>
         </div>

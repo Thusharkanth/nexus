@@ -3,7 +3,7 @@ import {
   AboutPreview, Services, Marquee, AllfixHighlight, WhyChoose,
   CaseStudies, Process, Team, Testimonials, FAQ, FinalCTA
 } from "@/components/sections/Sections";
-import { Navbar, Footer, ScrollProgress, CursorGlow } from "@/components/SiteChrome";
+import { Navbar, Footer, ScrollProgress, CursorGlow, SpaceParticles } from "@/components/SiteChrome";
 
 export default function Home() {
   return (
@@ -12,18 +12,27 @@ export default function Home() {
       <CursorGlow />
       <Navbar />
       <Hero />
-      <AboutPreview />
-      <Marquee />
-      <Services />
-      <AllfixHighlight />
-      <WhyChoose />
-      <CaseStudies />
-      <Process />
-      <Team />
-      <Testimonials />
-      <FAQ />
-      <FinalCTA />
-      <Footer />
+      <div className="relative z-10 bg-black overflow-hidden">
+        <SpaceParticles count={30} />
+        <AboutPreview />
+      </div>
+      <div 
+        className="relative z-10 overflow-hidden"
+        style={{ backgroundColor: "color-mix(in srgb, var(--neon) 2%, black)" }}
+      >
+        <SpaceParticles count={150} />
+        <Marquee />
+        <Services />
+        <AllfixHighlight />
+        <WhyChoose />
+        <CaseStudies />
+        <Process />
+        <Team />
+        <Testimonials />
+        <FAQ />
+        <FinalCTA />
+        <Footer />
+      </div>
     </div>
   );
 }
