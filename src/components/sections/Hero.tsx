@@ -32,19 +32,19 @@ export function Hero() {
     if (v1.current) {
       v1.current.load();
       v1.current.playbackRate = 0.8;
-      if (activeVideo === 1) v1.current.play().catch(() => {});
+      if (activeVideo === 1) v1.current.play().catch(() => { });
     }
     if (v2.current) {
       v2.current.load();
       v2.current.playbackRate = 0.8;
-      if (activeVideo === 2) v2.current.play().catch(() => {});
+      if (activeVideo === 2) v2.current.play().catch(() => { });
     }
   }, [videoSrc]);
 
   useEffect(() => {
     const currentVid = activeVideo === 1 ? v1.current : v2.current;
     const nextVid = activeVideo === 1 ? v2.current : v1.current;
-    
+
     if (!currentVid || !nextVid) return;
 
     let transitioned = false;
@@ -52,14 +52,14 @@ export function Hero() {
     const handleTime = () => {
       if (!currentVid.duration) return;
       const timeLeft = currentVid.duration - currentVid.currentTime;
-      
+
       // Crossfade 0.8 seconds before the video ends
       if (timeLeft <= 0.8 && !transitioned) {
         transitioned = true;
         nextVid.currentTime = 0;
-        nextVid.play().catch(() => {});
+        nextVid.play().catch(() => { });
         setActiveVideo(activeVideo === 1 ? 2 : 1);
-        
+
         setShowParticles(true);
         setTimeout(() => setShowParticles(false), 1500);
       }
@@ -117,7 +117,7 @@ export function Hero() {
 
         {/* Floating shapes */}
         <FloatingShapes />
-        
+
         {/* Transition particles that appear when video fades */}
         <TransitionParticles show={showParticles} />
 
@@ -146,14 +146,12 @@ export function Hero() {
             <h1 className="font-display text-[clamp(1.8rem,5.8vw,4.6rem)] font-bold leading-[0.95] tracking-tight text-balance">
               <RevealWords text="Engineering the" delay={0.3} />
               <br />
-<<<<<<< HEAD
-              <RevealWords text="Future of Business" delay={0.5} className="text-gradient" />
-=======
+
               <RevealWords text="Future of" delay={0.5} className="text-muted-foreground/80" />
               <span className="ml-2 sm:ml-3 inline-block">
                 <RevealWords text="Business." delay={0.7} className="text-gradient" />
               </span>
->>>>>>> 248e6470982bb95ce5ca8eb5d12e677d155d6616
+
             </h1>
 
             <motion.div
