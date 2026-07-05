@@ -79,7 +79,7 @@ export function Navbar() {
             <img 
               src="/logo/Nexus-01.png" 
               alt="Nexus Logo" 
-              className="absolute left-0 top-1/2 -translate-y-[44%] h-24 md:h-28 lg:h-36 w-auto max-w-none origin-left drop-shadow-xl" 
+              className="absolute left-0 top-1/2 -translate-y-1/2 h-24 md:h-28 lg:h-36 w-auto max-w-none origin-left drop-shadow-xl" 
             />
           </Link>
           <nav className="hidden items-center gap-1 md:flex">

@@ -166,13 +166,13 @@ function OrbitVisual() {
 
 /* ----------------- Services ----------------- */
 const SERVICES = [
-  { icon: Code2, title: "Website Development", desc: "High-performance marketing & content sites that convert." },
-  { icon: Workflow, title: "Web Applications", desc: "Production-grade web apps with delightful UX." },
-  { icon: Smartphone, title: "Mobile App Development", desc: "iOS & Android products built for scale." },
-  { icon: Cpu, title: "Custom Software", desc: "Bespoke systems tailored to your operations." },
-  { icon: Cloud, title: "SaaS Development", desc: "Multi-tenant platforms ready for global growth." },
+  { icon: Code2, title: "Web Experiences", desc: "Modern, conversion-focused websites built for speed and impact." },
+  { icon: Palette, title: "UI/UX Strategy", desc: "User-first design systems that improve usability and engagement." },
+  { icon: Compass, title: "Brand Identity", desc: "Distinct visual and digital brand direction for lasting recognition." },
+  { icon: Smartphone, title: "Mobile Solutions", desc: "Scalable iOS and Android apps tailored to real user needs." },
+  { icon: Cloud, title: "Cloud SaaS Platforms", desc: "Secure, cloud-native SaaS products designed for growth." },
+  { icon: Sparkles, title: "AI & Intelligent Automation", desc: "AI-powered workflows that automate operations and boost efficiency." },
   { icon: Bot, title: "AI Chatbots", desc: "Conversational agents trained on your business." },
-  { icon: Sparkles, title: "AI Automation", desc: "Automate repetitive workflows across ops, support, and sales with AI agents and smart process orchestration." },
   { icon: Zap, title: "AI Integration", desc: "Embed AI into the tools your team already uses." },
   { icon: LineChart, title: "Data Science & Analytics", desc: "Decisions backed by signal, not guesswork." },
   { icon: Palette, title: "UI/UX Design", desc: "Interfaces that feel inevitable." },
@@ -187,7 +187,7 @@ export function Services({ showViewAll = true }: { showViewAll?: boolean }) {
     SERVICES[2],
     SERVICES[3],
     SERVICES[4],
-    SERVICES[6], // Show AI Automation as the last featured card
+    SERVICES[5],
   ];
   const displayServices = showViewAll ? featuredServices : SERVICES;
 
@@ -410,12 +410,14 @@ export function WhyChoose() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.08 }}
-              className="group relative bg-background p-8 transition-colors hover:bg-surface"
+              className="group relative flex flex-col bg-background p-8 transition-colors hover:bg-surface h-full"
             >
               <w.icon className="h-7 w-7 text-neon transition-transform duration-300 group-hover:-translate-y-1" />
               <h3 className="mt-5 font-display text-lg font-semibold">{w.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{w.text}</p>
-              <Counter target={[98, 4, 24, 10][i]} suffix={["%", "x", "h", "+"][i]} label={["Client retention", "Faster shipping", "Avg response", "Years combined"][i]} />
+              <div className="mt-auto">
+                <Counter target={[98, 4, 24, 10][i]} suffix={["%", "x", "h", "+"][i]} label={["Client retention", "Faster shipping", "Avg response", "Years combined"][i]} />
+              </div>
             </motion.div>
           ))}
         </div>
@@ -446,9 +448,9 @@ function Counter({ target, suffix, label }: { target: number; suffix: string; la
 
 /* ----------------- Case Studies ----------------- */
 const CASES = [
-  { tag: "Challenge", title: "Business Problem", desc: "Describe the operational bottleneck, inefficiency, or growth blocker affecting performance.", color: "from-neon/30 to-transparent" },
-  { tag: "Solution", title: "Technology Implementation", desc: "Show the custom software, automation, AI, or platform solution introduced to solve it.", color: "from-emerald-400/20 to-transparent" },
-  { tag: "Impact", title: "Measurable Results", desc: "Highlight outcomes such as faster processes, reduced manual workload, and improved customer engagement.", color: "from-teal-400/20 to-transparent" },
+  { tag: "Challenge", title: "Business Problem", desc: "Describe the operational bottleneck, inefficiency, or growth blocker affecting performance.", image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop", color: "from-neon/30 to-transparent" },
+  { tag: "Solution", title: "Technology Implementation", desc: "Show the custom software, automation, AI, or platform solution introduced to solve it.", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop", color: "from-emerald-400/20 to-transparent" },
+  { tag: "Impact", title: "Measurable Results", desc: "Highlight outcomes such as faster processes, reduced manual workload, and improved customer engagement.", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop", color: "from-teal-400/20 to-transparent" },
 ];
 
 export function CaseStudies() {
@@ -474,12 +476,16 @@ export function CaseStudies() {
               transition={{ duration: 0.7, delay: i * 0.1 }}
               className="group relative overflow-hidden rounded-2xl border border-border bg-surface/50 transition-all duration-500 hover:border-neon/40"
             >
-              <div className={`relative aspect-[4/3] overflow-hidden bg-gradient-to-br ${c.color}`}>
-                <div className="absolute inset-0 grid-bg opacity-50" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="font-display text-5xl font-bold text-foreground/15 transition-transform duration-700 group-hover:scale-110">{c.title}</div>
-                </div>
-                <div className="absolute right-4 top-4 rounded-full glass px-3 py-1 text-[10px] uppercase tracking-wider">{c.tag}</div>
+              <div className={`relative aspect-[4/3] overflow-hidden bg-background`}>
+                <img 
+                  src={c.image} 
+                  alt={c.title} 
+                  className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 group-hover:scale-110 group-hover:opacity-70" 
+                />
+                <div className={`absolute inset-0 bg-gradient-to-br ${c.color} opacity-80 mix-blend-overlay`} />
+                <div className="absolute inset-0 grid-bg opacity-20" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                <div className="absolute right-4 top-4 rounded-full glass px-3 py-1 text-[10px] uppercase tracking-wider text-foreground z-10 backdrop-blur-md bg-white/5 border border-white/10">{c.tag}</div>
               </div>
               <div className="p-6">
                 <h3 className="font-display text-xl font-semibold">{c.title}</h3>
